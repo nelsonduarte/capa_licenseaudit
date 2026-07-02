@@ -1,0 +1,51 @@
+LicenseAudit compliance report
+==============================
+audited repository: violating_repo
+
+VERDICT: FAIL (compliance gate blocked; see findings below)
+
+== Risk summary ==
+  dependencies audited: 13
+  license: 9 ok, 1 review, 3 violation
+  vulnerabilities: 6 total (critical=2 high=1 medium=2 low=1)
+
+== License violations ==
+  [deny] pkg:cargo/readline-gnu@8.2.0
+      license=GPL-3.0 category=strong-copyleft
+      reason: strong copyleft incompatible with proprietary distribution
+  [deny] pkg:npm/copyleft-core@2.4.0
+      license=AGPL-3.0 category=network-copyleft
+      reason: network copyleft; forbidden in SaaS proprietary code
+  [unknown] pkg:cargo/image-magick-bind@1.0.2
+      license=ImageMagick category=unclassified
+      reason: license id is not listed in the policy; triage required before shipping
+
+== Licenses awaiting review ==
+  [review] pkg:cargo/mozilla-cert-store@0.9.1
+      license=MPL-2.0 category=weak-copyleft
+      note: file-level copyleft; allowed after legal review
+
+== Vulnerable dependencies ==
+  [low] OSV-2019-0987  pkg:npm/left-pad@1.3.0
+      denial of service on extremely large pad length
+  [high] OSV-2021-0043  pkg:npm/minimist@1.2.5
+      prototype pollution via crafted argument key
+  [medium] OSV-2022-0777  pkg:pypi/requests@2.31.0
+      proxy-authorization header leak on cross-origin redirect
+  [critical] OSV-2020-0512  pkg:pypi/pyyaml@5.3.1
+      arbitrary code execution in full_load with untrusted input
+  [critical] GHSA-jf85-cpcp-j695  pkg:maven/log4shell-demo@2.14.1
+      remote code execution via JNDI lookup (Log4Shell-class)
+  [medium] GHSA-xxxx-image  pkg:cargo/image-magick-bind@1.0.2
+      out-of-bounds read parsing malformed image headers
+
+== Remediation checklist ==
+  [ ] replace or re-license readline-gnu (GPL-3.0); disposition=deny
+  [ ] replace or re-license copyleft-core (AGPL-3.0); disposition=deny
+  [ ] replace or re-license image-magick-bind (ImageMagick); disposition=unknown
+  [ ] upgrade left-pad past 1.3.0 (fixes OSV-2019-0987, low)
+  [ ] upgrade minimist past 1.2.5 (fixes OSV-2021-0043, high)
+  [ ] upgrade requests past 2.31.0 (fixes OSV-2022-0777, medium)
+  [ ] upgrade pyyaml past 5.3.1 (fixes OSV-2020-0512, critical)
+  [ ] upgrade log4shell-demo past 2.14.1 (fixes GHSA-jf85-cpcp-j695, critical)
+  [ ] upgrade image-magick-bind past 1.0.2 (fixes GHSA-xxxx-image, medium)

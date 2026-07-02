@@ -1,0 +1,90 @@
+// sbom.capa
+//
+// Emit a CycloneDX 1.5 SBOM of the AUDITED project. This is a PROGRAM
+// OUTPUT: LicenseAudit ingests the raw dependency lockfile and produces a
+// standards-shaped SBOM from it, with each component's license and any
+// matched vulnerability attached. (Distinct from the capability SBOM the
+// Capa compiler emits for LicenseAudit ITSELF, in sbom/manifest.json etc.)
+//
+// The JSON is hand-built with a deterministic key order and no clock, so
+// it is byte-identical across backends. Strings that could contain a quote
+// or backslash (license notes, summaries) are escaped. Zero capabilities:
+// pure document construction over the findings.
+
+import domain
+
+// Minimal JSON string escaping: backslash and double quote. The inputs
+// here are SPDX ids, versions, advisory ids and short summaries, none of
+// which carry control characters, so this covers the realistic surface.
+fun esc(s: String) -> String
+    var out = ""
+    var i = 0
+    while i < s.length()
+        let c = s.substring(i, i + 1)
+        if c == "\\"
+            out = "${out}\\\\"
+        elif c == "\""
+            out = "${out}\\\""
+        else
+            out = "${out}${c}"
+        i = i + 1
+    return out
+
+fun component_json(dep: Dependency) -> String
+    var t = "    {\n"
+    t = "${t}      \"type\": \"library\",\n"
+    t = "${t}      \"name\": \"${esc(dep.name)}\",\n"
+    t = "${t}      \"version\": \"${esc(dep.version)}\",\n"
+    t = "${t}      \"purl\": \"${esc(dep_coordinate(dep))}\",\n"
+    t = "${t}      \"licenses\": [{ \"license\": { \"id\": \"${esc(dep.license)}\" } }]\n"
+    t = "${t}    }"
+    return t
+
+fun components_json(deps: List<Dependency>) -> String
+    var t = "  \"components\": [\n"
+    var first = true
+    for dep in deps
+        if first
+            first = false
+        else
+            t = "${t},\n"
+        t = "${t}${component_json(dep)}"
+    t = "${t}\n  ]"
+    return t
+
+fun vuln_json(v: VulnFinding) -> String
+    var t = "    {\n"
+    t = "${t}      \"id\": \"${esc(v.advisory.id)}\",\n"
+    t = "${t}      \"affects\": [{ \"ref\": \"${esc(dep_coordinate(v.dep))}\" }],\n"
+    t = "${t}      \"ratings\": [{ \"severity\": \"${esc(v.advisory.severity)}\" }],\n"
+    t = "${t}      \"description\": \"${esc(v.advisory.summary)}\"\n"
+    t = "${t}    }"
+    return t
+
+fun vulnerabilities_json(vulns: List<VulnFinding>) -> String
+    if vulns.length() == 0
+        return "  \"vulnerabilities\": []"
+    var t = "  \"vulnerabilities\": [\n"
+    var first = true
+    for v in vulns
+        if first
+            first = false
+        else
+            t = "${t},\n"
+        t = "${t}${vuln_json(v)}"
+    t = "${t}\n  ]"
+    return t
+
+// The full CycloneDX 1.5 SBOM of the audited project. `serial` is a stable
+// caller-supplied identifier (the repo label) so the artefact is
+// reproducible and carries no timestamp.
+pub fun build_sbom(serial: String, deps: List<Dependency>, vulns: List<VulnFinding>) -> String
+    var t = "{\n"
+    t = "${t}  \"bomFormat\": \"CycloneDX\",\n"
+    t = "${t}  \"specVersion\": \"1.5\",\n"
+    t = "${t}  \"version\": 1,\n"
+    t = "${t}  \"metadata\": { \"component\": { \"type\": \"application\", \"name\": \"${esc(serial)}\" } },\n"
+    t = "${t}${components_json(deps)},\n"
+    t = "${t}${vulnerabilities_json(vulns)}\n"
+    t = "${t}}\n"
+    return t

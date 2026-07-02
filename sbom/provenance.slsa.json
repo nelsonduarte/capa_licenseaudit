@@ -1,0 +1,105 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "domain.capa",
+      "digest": {
+        "sha256": "097dba9623656833925ff8c92ac5861a2175f8e3a1d9339a93245b1f2ce14102"
+      }
+    },
+    {
+      "name": "licenseaudit.capa",
+      "digest": {
+        "sha256": "dc2b4f432166b7ab448f96cb85e1b6008fb04ba8fb1bf9e6e417e674b0ee88b1"
+      }
+    },
+    {
+      "name": "manifest.capa",
+      "digest": {
+        "sha256": "6ca230c7596ba02fb4c5eaecad685141cee218237674db8f590db8776eb880ca"
+      }
+    },
+    {
+      "name": "osv.capa",
+      "digest": {
+        "sha256": "427b602f6a3bc1dc38710db85757f5067886ebae846cbb2ad41f561a72e50124"
+      }
+    },
+    {
+      "name": "policy.capa",
+      "digest": {
+        "sha256": "657d25fac6c4976238c1da70d46ede8b34f83d266f5136078d4a645deda6f9ce"
+      }
+    },
+    {
+      "name": "readfs.capa",
+      "digest": {
+        "sha256": "254e0bde58d1cb787e916006bb5407887ba0f1e2bb95a223e78dc0d0218509ed"
+      }
+    },
+    {
+      "name": "report.capa",
+      "digest": {
+        "sha256": "436688833e041393234d5c4e1df7dfc55c02599fe8152807f2eed4c7e4be738d"
+      }
+    },
+    {
+      "name": "risk.capa",
+      "digest": {
+        "sha256": "457d9880b9ee70f3a5c8c9ca12ceddd46502b846448e8fe5c13d9854957cedf9"
+      }
+    },
+    {
+      "name": "sbom.capa",
+      "digest": {
+        "sha256": "7e643bbf8e884be1030e41d2bfc8824433dc8b1ecb015ea37cf0de8f35a42666"
+      }
+    },
+    {
+      "name": "vendor/capa_csv/header.capa",
+      "digest": {
+        "sha256": "138b5cadbbe34d7cddff2ca19ea526ee77d6c9fa3016909711b5e678a7221ee3"
+      }
+    },
+    {
+      "name": "vendor/capa_csv/model.capa",
+      "digest": {
+        "sha256": "6b465e5b05ece6824ab6da4f6211ff90451d6b43dd69efe8552904ae31ba36b1"
+      }
+    },
+    {
+      "name": "vendor/capa_csv/parse.capa",
+      "digest": {
+        "sha256": "ca50f268488fced7628a5e2677756f60a4b28893ca58c5525451a2abacf14e41"
+      }
+    }
+  ],
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://capa-language.com/build/transpile-to-python/v1",
+      "externalParameters": {
+        "source": "licenseaudit.capa"
+      },
+      "internalParameters": {
+        "capaVersion": "1.13.0",
+        "target": "python>=3.10"
+      },
+      "resolvedDependencies": []
+    },
+    "runDetails": {
+      "builder": {
+        "id": "https://capa-language.com/cli",
+        "version": {
+          "capa": "1.13.0"
+        }
+      },
+      "metadata": {
+        "invocationId": "2f0cd26c-3bc8-50f6-b9fb-6188d251e2b8",
+        "startedOn": "2026-01-01T00:00:00Z",
+        "finishedOn": "2026-01-01T00:00:00Z"
+      },
+      "byproducts": []
+    }
+  }
+}

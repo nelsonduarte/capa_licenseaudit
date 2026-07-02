@@ -1,0 +1,26 @@
+# capa_licenseaudit - package manifest.
+#
+# LicenseAudit walks a monorepo's dependency lockfile and emits a
+# compliance report plus a CycloneDX SBOM of the audited project. Its
+# central Capa guarantee is an "auditor that only reads": the repository
+# under audit is reached exclusively through a user-defined `ReadOnlyFs`
+# capability whose surface is a single `read` method, so the compiler
+# proves the auditor cannot modify the tree it audits.
+#
+# One dependency, pure and capability-free, vendored under vendor/ and
+# wired as a PATH dependency so its parent (vendor/) joins the module
+# search path:
+#
+#   capa_csv - RFC 4180 CSV parsing (the lockfile / policy / OSV reader).
+#
+# The dependency holds no authority, so the LicenseAudit capability
+# surface stays exactly what main.capa acquires: Fs and Stdio, nothing
+# more. The compiler's --manifest / --cyclonedx output proves it.
+
+[package]
+name = "capa_licenseaudit"
+version = "0.1.0"
+capa = ">=1.3.0"
+
+[dependencies.capa_csv]
+path = "vendor/capa_csv"

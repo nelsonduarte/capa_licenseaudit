@@ -1,0 +1,13 @@
+spdx,disposition,category,note
+MIT,allow,permissive,permissive; no copyleft obligations
+Apache-2.0,allow,permissive,permissive with patent grant
+BSD-3-Clause,allow,permissive,permissive
+BSD-2-Clause,allow,permissive,permissive
+ISC,allow,permissive,permissive
+Zlib,allow,permissive,permissive
+Unlicense,allow,public-domain,public-domain dedication
+MPL-2.0,review,weak-copyleft,file-level copyleft; allowed after legal review
+LGPL-2.1,review,weak-copyleft,dynamic-link copyleft; review linkage
+GPL-2.0,deny,strong-copyleft,strong copyleft incompatible with proprietary distribution
+GPL-3.0,deny,strong-copyleft,strong copyleft incompatible with proprietary distribution
+AGPL-3.0,deny,network-copyleft,network copyleft; forbidden in SaaS proprietary code

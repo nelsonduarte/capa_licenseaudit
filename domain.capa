@@ -1,0 +1,154 @@
+// domain.capa
+//
+// The shared vocabulary for LicenseAudit: the dependency model, the
+// license-policy model, the vulnerability-advisory model, and the typed
+// error channel every fallible step threads through. Pure data and pure
+// total helpers; zero capabilities, no I/O.
+//
+// LicenseAudit walks a monorepo's dependency lockfile and answers two
+// compliance questions an OSPO and a security team both own:
+//
+//   1. LICENSE CONFORMANCE (the primary axis). Every dependency carries an
+//      SPDX license id. The organisation's policy classifies each id as
+//      allow / review / deny. A strong- or network-copyleft license
+//      (GPL-3.0, AGPL-3.0, ...) in a proprietary product is a distribution
+//      risk; a license the policy does not list at all is an unknown risk.
+//
+//   2. KNOWN VULNERABILITIES (the secondary axis). Each dependency at its
+//      pinned version is cross-referenced against a local OSV advisory
+//      feed; a name+version match is a finding, weighted by severity.
+//
+// The output is a human compliance report plus a CycloneDX SBOM of the
+// AUDITED project (produced by this program), alongside the capability
+// SBOM the Capa compiler emits for LicenseAudit itself.
+//
+// Note on the classification fields (`disposition`, `severity`): they are
+// held as canonical, closed-set STRING tokens rather than as enum-typed
+// struct fields, and the helpers below are the single source of truth for
+// the allowed values. This keeps the model portable across the Python and
+// Wasm backends (a nullary-enum field inside a struct is not yet supported
+// by the Wasm emitter; see the note in the README).
+
+// =========================================================
+// Dependency (one row of the resolved lockfile)
+// =========================================================
+
+pub type Dependency {
+    name: String,
+    version: String,
+    license: String,     // SPDX id as declared in the lockfile
+    ecosystem: String    // npm / pypi / cargo / maven ...
+}
+
+// A stable "package URL"-flavoured coordinate for the SBOM and the report.
+pub fun dep_coordinate(d: Dependency) -> String
+    return "pkg:${d.ecosystem}/${d.name}@${d.version}"
+
+// =========================================================
+// License policy
+// =========================================================
+//
+// Disposition is a closed set of canonical tokens:
+//   allow   - permissive; conformant.
+//   review  - a gate needing a recorded human decision (weak copyleft).
+//   deny    - forbidden (strong / network copyleft in proprietary code).
+//   unknown - the id is not in the policy at all; fail closed.
+
+pub fun canonical_disposition(s: String) -> String
+    let t = s.trim()
+    if t == "allow"
+        return "allow"
+    if t == "review"
+        return "review"
+    if t == "deny"
+        return "deny"
+    return "unknown"
+
+pub type PolicyEntry {
+    spdx: String,
+    disposition: String,   // canonical: allow / review / deny
+    category: String,      // permissive / weak-copyleft / strong-copyleft ...
+    note: String
+}
+
+pub type Policy {
+    entries: List<PolicyEntry>
+}
+
+// A license finding: one dependency evaluated against the policy.
+pub type LicenseFinding {
+    dep: Dependency,
+    disposition: String,   // canonical: allow / review / deny / unknown
+    category: String,
+    note: String
+}
+
+// A finding is a VIOLATION when the disposition is `deny` (a forbidden
+// license, e.g. strong copyleft in proprietary code) or `unknown` (an
+// un-triaged license). `review` is a gate, reported separately, not a
+// violation on its own.
+pub fun is_violation(f: LicenseFinding) -> Bool
+    return f.disposition == "deny" or f.disposition == "unknown"
+
+pub fun needs_review(f: LicenseFinding) -> Bool
+    return f.disposition == "review"
+
+// =========================================================
+// Vulnerability advisory (one row of the local OSV feed)
+// =========================================================
+//
+// Severity is a closed set of canonical tokens (critical/high/medium/low)
+// with a numeric rank for ordering and totalling.
+
+pub fun canonical_severity(s: String) -> String
+    let t = s.trim()
+    if t == "critical"
+        return "critical"
+    if t == "high"
+        return "high"
+    if t == "medium"
+        return "medium"
+    return "low"
+
+pub fun severity_rank(s: String) -> Int
+    if s == "critical"
+        return 4
+    if s == "high"
+        return 3
+    if s == "medium"
+        return 2
+    return 1
+
+pub type Advisory {
+    id: String,
+    package: String,
+    version: String,
+    severity: String,      // canonical: critical / high / medium / low
+    summary: String
+}
+
+// A vulnerability finding: one dependency matched against one advisory.
+pub type VulnFinding {
+    dep: Dependency,
+    advisory: Advisory
+}
+
+// =========================================================
+// Error channel
+// =========================================================
+//
+// Every fallible step (read, parse, missing column) is a typed,
+// explainable error, never a crash. Threaded through Result and `?`.
+
+pub type AuditError =
+    MissingColumn(String)
+    MalformedInput(String)
+    EmptyDataset(String)
+    Io(String)
+
+pub fun audit_error_message(e: AuditError) -> String
+    return match e
+        MissingColumn(name) -> "input is missing required column '${name}'"
+        MalformedInput(what) -> "malformed input: ${what}"
+        EmptyDataset(what)   -> "${what} is empty (a header but no records)"
+        Io(msg)              -> "I/O error: ${msg}"

@@ -1,0 +1,5574 @@
+{
+  "capa_version": "1.13.0",
+  "schema_version": 1,
+  "filename": "licenseaudit.capa",
+  "user_defined_capabilities": [
+    {
+      "name": "ReadOnlyFs",
+      "methods": [
+        "read"
+      ],
+      "implementors": [
+        "FsReadView"
+      ],
+      "doc": null
+    }
+  ],
+  "typestates": [],
+  "functions": [
+    {
+      "name": "dep_coordinate",
+      "source_name": "dep_coordinate",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "domain.capa:44:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "d",
+          "type": "Dependency",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "canonical_disposition",
+      "source_name": "canonical_disposition",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "domain.capa:57:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "s",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "s.trim",
+          "pos": "58:13",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "is_violation",
+      "source_name": "is_violation",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "domain.capa:90:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "f",
+          "type": "LicenseFinding",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Bool",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "needs_review",
+      "source_name": "needs_review",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "domain.capa:93:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "f",
+          "type": "LicenseFinding",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Bool",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "canonical_severity",
+      "source_name": "canonical_severity",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "domain.capa:103:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "s",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "s.trim",
+          "pos": "104:13",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "severity_rank",
+      "source_name": "severity_rank",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "domain.capa:113:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "s",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Int",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "audit_error_message",
+      "source_name": "audit_error_message",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "domain.capa:149:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "e",
+          "type": "AuditError",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "read",
+      "source_name": "read",
+      "container": "_capa_m2__FsReadView",
+      "source_container": "FsReadView",
+      "source_module_index": null,
+      "pos": "readfs.capa:39:5",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "self",
+          "type": "Self",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "path",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<String, IoError>",
+      "declared_capabilities": [
+        "ReadOnlyFs"
+      ],
+      "transitively_reachable_capabilities": [
+        "Fs",
+        "ReadOnlyFs"
+      ],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Net",
+        "Proc",
+        "Random",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "self.fs.read",
+          "pos": "40:16",
+          "args": [
+            "path"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "make_read_view",
+      "source_name": "make_read_view",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "readfs.capa:44:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "fs",
+          "type": "Fs",
+          "consuming": false,
+          "is_capability": true,
+          "is_linear": false
+        },
+        {
+          "name": "prefix",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "FsReadView",
+      "declared_capabilities": [
+        "Fs"
+      ],
+      "transitively_reachable_capabilities": [
+        "Fs",
+        "ReadOnlyFs"
+      ],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Net",
+        "Proc",
+        "Random",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "fs.restrict_to",
+          "pos": "45:29",
+          "args": [
+            "prefix"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "comma",
+      "source_name": "comma",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/model.capa:31:5",
+      "is_pub": true,
+      "doc": "The default RFC 4180 dialect: comma-delimited.",
+      "params": [],
+      "return_type": "Dialect",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "tab",
+      "source_name": "tab",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/model.capa:35:5",
+      "is_pub": true,
+      "doc": "Tab-separated values.",
+      "params": [],
+      "return_type": "Dialect",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "with_delimiter",
+      "source_name": "with_delimiter",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/model.capa:42:5",
+      "is_pub": true,
+      "doc": "A dialect with an arbitrary single-character delimiter. A\ndelimiter that is not exactly one character, or that is the\nquote character itself, is a programming error the parser\nrejects with `BadDialect` rather than misbehaving silently.",
+      "params": [
+        {
+          "name": "delim",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Dialect",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "error_message",
+      "source_name": "error_message",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/model.capa:88:5",
+      "is_pub": true,
+      "doc": "A human-readable, backend-identical rendering of an error.\nPositions are 1-based record numbers, the unit an operator\nreasons about.",
+      "params": [
+        {
+          "name": "e",
+          "type": "CsvError",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m6__at",
+      "source_name": "at",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 6,
+      "pos": "vendor/capa_csv/parse.capa:34:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "s",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "i",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "s.char_at",
+          "pos": "35:18",
+          "args": [
+            "i"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "parse",
+      "source_name": "parse",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/parse.capa:40:5",
+      "is_pub": true,
+      "doc": "Parse CSV text with the default comma dialect.",
+      "params": [
+        {
+          "name": "text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<Table, CsvError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "parse_with",
+          "pos": "41:12",
+          "args": [
+            "text",
+            "comma()"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "comma",
+          "pos": "41:29",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "parse_with",
+      "source_name": "parse_with",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/parse.capa:44:5",
+      "is_pub": true,
+      "doc": "Parse CSV text with an explicit dialect.",
+      "params": [
+        {
+          "name": "text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "dialect",
+          "type": "Dialect",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<Table, CsvError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "delim.length",
+          "pos": "46:8",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "47:16",
+          "args": [
+            "BadDialect(\"delimiter must be exactly one character, got '${...}'\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "BadDialect",
+          "pos": "47:20",
+          "args": [
+            "\"delimiter must be exactly one character, got '${...}'\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "49:16",
+          "args": [
+            "BadDialect(\"delimiter cannot be the quote character\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "BadDialect",
+          "pos": "49:20",
+          "args": [
+            "\"delimiter cannot be the quote character\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "51:16",
+          "args": [
+            "BadDialect(\"delimiter cannot be a newline character\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "BadDialect",
+          "pos": "51:20",
+          "args": [
+            "\"delimiter cannot be a newline character\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "text.length",
+          "pos": "54:13",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m6__at",
+          "pos": "64:17",
+          "args": [
+            "text",
+            "i"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "field.is_empty",
+          "pos": "69:20",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "70:24",
+          "args": [
+            "UnexpectedChar(record_no)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "UnexpectedChar",
+          "pos": "70:28",
+          "args": [
+            "record_no"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m6__scan_quoted",
+          "pos": "71:23",
+          "args": [
+            "text",
+            "i + 1",
+            "record_no"
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "73:34",
+          "args": [
+            "e"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m6__at",
+          "pos": "81:37",
+          "args": [
+            "text",
+            "i"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "83:36",
+          "args": [
+            "UnexpectedChar(record_no)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "UnexpectedChar",
+          "pos": "83:40",
+          "args": [
+            "record_no"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "fields.push",
+          "pos": "87:13",
+          "args": [
+            "field"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m6__at",
+          "pos": "96:40",
+          "args": [
+            "text",
+            "j"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "field.is_empty",
+          "pos": "99:37",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "fields.push",
+          "pos": "100:17",
+          "args": [
+            "field"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "rows.push",
+          "pos": "101:17",
+          "args": [
+            "Row { fields: fields }"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "field.is_empty",
+          "pos": "115:29",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "fields.push",
+          "pos": "116:9",
+          "args": [
+            "field"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "rows.push",
+          "pos": "117:9",
+          "args": [
+            "Row { fields: fields }"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "119:12",
+          "args": [
+            "Table { rows: rows }"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m6__scan_quoted",
+      "source_name": "scan_quoted",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 6,
+      "pos": "vendor/capa_csv/parse.capa:131:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "start",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "record_no",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<Quoted, CsvError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "text.length",
+          "pos": "132:13",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m6__at",
+          "pos": "136:17",
+          "args": [
+            "text",
+            "i"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m6__at",
+          "pos": "140:26",
+          "args": [
+            "text",
+            "j"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "145:20",
+          "args": [
+            "_capa_m6__Quoted { value: value, next: i + 1 }"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "148:12",
+          "args": [
+            "UnclosedQuote(record_no)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "UnclosedQuote",
+          "pos": "148:16",
+          "args": [
+            "record_no"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "parse_headed",
+      "source_name": "parse_headed",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/header.capa:24:5",
+      "is_pub": true,
+      "doc": "Parse CSV text and take its first record as the header.\nEmpty input yields an empty header and no rows.",
+      "params": [
+        {
+          "name": "text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<HeaderTable, CsvError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "parse_headed_with",
+          "pos": "25:12",
+          "args": [
+            "text",
+            "comma()"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "comma",
+          "pos": "25:36",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "parse_headed_with",
+      "source_name": "parse_headed_with",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/header.capa:28:5",
+      "is_pub": true,
+      "doc": "Parse with an explicit dialect, first record as the header.",
+      "params": [
+        {
+          "name": "text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "dialect",
+          "type": "Dialect",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<HeaderTable, CsvError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "parse_with",
+          "pos": "29:17",
+          "args": [
+            "text",
+            "dialect"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "30:12",
+          "args": [
+            "from_table(table)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "from_table",
+          "pos": "30:15",
+          "args": [
+            "table"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "from_table",
+      "source_name": "from_table",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/header.capa:34:5",
+      "is_pub": true,
+      "doc": "Build a header view from an already-parsed Table. The first\nrecord becomes the columns; the rest become the data rows.",
+      "params": [
+        {
+          "name": "table",
+          "type": "Table",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "HeaderTable",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "data.push",
+          "pos": "43:13",
+          "args": [
+            "row"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "length",
+      "source_name": "length",
+      "container": "HeaderTable",
+      "source_container": "HeaderTable",
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/header.capa:48:9",
+      "is_pub": true,
+      "doc": "The number of data records (header excluded).",
+      "params": [
+        {
+          "name": "self",
+          "type": "Self",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Int",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "self.rows.length",
+          "pos": "49:16",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "column_index",
+      "source_name": "column_index",
+      "container": "HeaderTable",
+      "source_container": "HeaderTable",
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/header.capa:52:9",
+      "is_pub": true,
+      "doc": "The zero-based index of a column, or None if absent.",
+      "params": [
+        {
+          "name": "self",
+          "type": "Self",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Option<Int>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "Some",
+          "pos": "56:24",
+          "args": [
+            "i"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "has_column",
+      "source_name": "has_column",
+      "container": "HeaderTable",
+      "source_container": "HeaderTable",
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/header.capa:61:9",
+      "is_pub": true,
+      "doc": "Whether the header declares a column by this name.",
+      "params": [
+        {
+          "name": "self",
+          "type": "Self",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Bool",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "self.column_index",
+          "pos": "62:22",
+          "args": [
+            "name"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "get",
+      "source_name": "get",
+      "container": "HeaderTable",
+      "source_container": "HeaderTable",
+      "source_module_index": null,
+      "pos": "vendor/capa_csv/header.capa:72:9",
+      "is_pub": true,
+      "doc": "The value of `column` in data record `row_index`\n(zero-based, header excluded). Errors with `NoSuchColumn`\nwhen the header has no such column, with `NoSuchRow` when\nthere is no data record at `row_index`, and with `ShortRow`\nwhen the record exists but has fewer fields than the\ncolumn's index.",
+      "params": [
+        {
+          "name": "self",
+          "type": "Self",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "row_index",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "column",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<String, CsvError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "self.column_index",
+          "pos": "73:25",
+          "args": [
+            "column"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "75:31",
+          "args": [
+            "NoSuchColumn(column)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "NoSuchColumn",
+          "pos": "75:35",
+          "args": [
+            "column"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "self.rows.get",
+          "pos": "76:25",
+          "args": [
+            "row_index"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "78:31",
+          "args": [
+            "NoSuchRow(row_index)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "NoSuchRow",
+          "pos": "78:35",
+          "args": [
+            "row_index"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "row.fields.get",
+          "pos": "79:22",
+          "args": [
+            "idx"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "80:24",
+          "args": [
+            "v"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "81:24",
+          "args": [
+            "ShortRow(column)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "ShortRow",
+          "pos": "81:28",
+          "args": [
+            "column"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m3__required_columns",
+      "source_name": "required_columns",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 3,
+      "pos": "manifest.capa:23:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [],
+      "return_type": "List<String>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m3__cell",
+      "source_name": "cell",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 3,
+      "pos": "manifest.capa:26:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "view",
+          "type": "HeaderTable",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "idx",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "column",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<String, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "view.get",
+          "pos": "27:18",
+          "args": [
+            "idx",
+            "column"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "28:19",
+          "args": [
+            "v"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "29:19",
+          "args": [
+            "MalformedInput(\"lockfile row ${...} is missing column '${...}'\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "MalformedInput",
+          "pos": "29:23",
+          "args": [
+            "\"lockfile row ${...} is missing column '${...}'\""
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m3__build_dependency",
+      "source_name": "build_dependency",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 3,
+      "pos": "manifest.capa:31:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "view",
+          "type": "HeaderTable",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "idx",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<Dependency, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "_capa_m3__cell",
+          "pos": "32:21",
+          "args": [
+            "view",
+            "idx",
+            "\"name\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m3__cell",
+          "pos": "33:21",
+          "args": [
+            "view",
+            "idx",
+            "\"version\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m3__cell",
+          "pos": "34:21",
+          "args": [
+            "view",
+            "idx",
+            "\"license\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m3__cell",
+          "pos": "35:21",
+          "args": [
+            "view",
+            "idx",
+            "\"ecosystem\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "36:12",
+          "args": [
+            "Dependency { name: name.trim(), version: version.trim(), license: license.tri..."
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "name.trim",
+          "pos": "37:15",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "version.trim",
+          "pos": "38:18",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "license.trim",
+          "pos": "39:18",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "ecosystem.trim",
+          "pos": "40:20",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "parse_lockfile",
+      "source_name": "parse_lockfile",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "manifest.capa:46:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<List<Dependency>, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "parse_headed",
+          "pos": "47:22",
+          "args": [
+            "text"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "49:26",
+          "args": [
+            "MalformedInput(error_message(e))"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "MalformedInput",
+          "pos": "49:30",
+          "args": [
+            "error_message(e)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "error_message",
+          "pos": "49:45",
+          "args": [
+            "e"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m3__required_columns",
+          "pos": "50:16",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "view.has_column",
+          "pos": "51:16",
+          "args": [
+            "col"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "52:20",
+          "args": [
+            "MissingColumn(col)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "MissingColumn",
+          "pos": "52:24",
+          "args": [
+            "col"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "view.length",
+          "pos": "53:8",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "54:16",
+          "args": [
+            "EmptyDataset(\"dependency lockfile\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "EmptyDataset",
+          "pos": "54:20",
+          "args": [
+            "\"dependency lockfile\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "view.length",
+          "pos": "57:15",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m3__build_dependency",
+          "pos": "58:17",
+          "args": [
+            "view",
+            "i"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "deps.push",
+          "pos": "59:9",
+          "args": [
+            "d"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "61:12",
+          "args": [
+            "deps"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m7__required_columns",
+      "source_name": "required_columns",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 7,
+      "pos": "policy.capa:24:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [],
+      "return_type": "List<String>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m7__cell",
+      "source_name": "cell",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 7,
+      "pos": "policy.capa:27:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "view",
+          "type": "HeaderTable",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "idx",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "column",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<String, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "view.get",
+          "pos": "28:18",
+          "args": [
+            "idx",
+            "column"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "29:19",
+          "args": [
+            "v"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "30:19",
+          "args": [
+            "MalformedInput(\"policy row ${...} is missing column '${...}'\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "MalformedInput",
+          "pos": "30:23",
+          "args": [
+            "\"policy row ${...} is missing column '${...}'\""
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m7__build_entry",
+      "source_name": "build_entry",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 7,
+      "pos": "policy.capa:32:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "view",
+          "type": "HeaderTable",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "idx",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<PolicyEntry, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "_capa_m7__cell",
+          "pos": "33:20",
+          "args": [
+            "view",
+            "idx",
+            "\"spdx\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m7__cell",
+          "pos": "34:20",
+          "args": [
+            "view",
+            "idx",
+            "\"disposition\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m7__cell",
+          "pos": "35:20",
+          "args": [
+            "view",
+            "idx",
+            "\"category\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m7__cell",
+          "pos": "36:20",
+          "args": [
+            "view",
+            "idx",
+            "\"note\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "37:12",
+          "args": [
+            "PolicyEntry { spdx: spdx.trim(), disposition: canonical_disposition(disp), ca..."
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "spdx.trim",
+          "pos": "38:15",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "canonical_disposition",
+          "pos": "39:22",
+          "args": [
+            "disp"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "category.trim",
+          "pos": "40:19",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "note.trim",
+          "pos": "41:15",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "parse_policy",
+      "source_name": "parse_policy",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "policy.capa:44:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<Policy, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "parse_headed",
+          "pos": "45:22",
+          "args": [
+            "text"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "47:26",
+          "args": [
+            "MalformedInput(error_message(e))"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "MalformedInput",
+          "pos": "47:30",
+          "args": [
+            "error_message(e)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "error_message",
+          "pos": "47:45",
+          "args": [
+            "e"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m7__required_columns",
+          "pos": "48:16",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "view.has_column",
+          "pos": "49:16",
+          "args": [
+            "col"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "50:20",
+          "args": [
+            "MissingColumn(col)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "MissingColumn",
+          "pos": "50:24",
+          "args": [
+            "col"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "view.length",
+          "pos": "51:8",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "52:16",
+          "args": [
+            "EmptyDataset(\"license policy\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "EmptyDataset",
+          "pos": "52:20",
+          "args": [
+            "\"license policy\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "view.length",
+          "pos": "55:15",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m7__build_entry",
+          "pos": "56:17",
+          "args": [
+            "view",
+            "i"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "entries.push",
+          "pos": "57:9",
+          "args": [
+            "e"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "59:12",
+          "args": [
+            "Policy { entries: entries }"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m7__evaluate_one",
+      "source_name": "evaluate_one",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 7,
+      "pos": "policy.capa:63:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "policy",
+          "type": "Policy",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "dep",
+          "type": "Dependency",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "LicenseFinding",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "evaluate_licenses",
+      "source_name": "evaluate_licenses",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "policy.capa:83:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "policy",
+          "type": "Policy",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "deps",
+          "type": "List<Dependency>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "List<LicenseFinding>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "findings.push",
+          "pos": "86:9",
+          "args": [
+            "_capa_m7__evaluate_one(policy, dep)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m7__evaluate_one",
+          "pos": "86:23",
+          "args": [
+            "policy",
+            "dep"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m8__required_columns",
+      "source_name": "required_columns",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 8,
+      "pos": "osv.capa:24:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [],
+      "return_type": "List<String>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m8__cell",
+      "source_name": "cell",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 8,
+      "pos": "osv.capa:27:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "view",
+          "type": "HeaderTable",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "idx",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "column",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<String, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "view.get",
+          "pos": "28:18",
+          "args": [
+            "idx",
+            "column"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "29:19",
+          "args": [
+            "v"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "30:19",
+          "args": [
+            "MalformedInput(\"osv row ${...} is missing column '${...}'\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "MalformedInput",
+          "pos": "30:23",
+          "args": [
+            "\"osv row ${...} is missing column '${...}'\""
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m8__build_advisory",
+      "source_name": "build_advisory",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 8,
+      "pos": "osv.capa:32:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "view",
+          "type": "HeaderTable",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "idx",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<Advisory, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "_capa_m8__cell",
+          "pos": "33:20",
+          "args": [
+            "view",
+            "idx",
+            "\"id\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m8__cell",
+          "pos": "34:20",
+          "args": [
+            "view",
+            "idx",
+            "\"package\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m8__cell",
+          "pos": "35:20",
+          "args": [
+            "view",
+            "idx",
+            "\"version\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m8__cell",
+          "pos": "36:20",
+          "args": [
+            "view",
+            "idx",
+            "\"severity\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m8__cell",
+          "pos": "37:20",
+          "args": [
+            "view",
+            "idx",
+            "\"summary\""
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "38:12",
+          "args": [
+            "Advisory { id: id.trim(), package: package.trim(), version: version.trim(), s..."
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "id.trim",
+          "pos": "39:13",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "package.trim",
+          "pos": "40:18",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "version.trim",
+          "pos": "41:18",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "canonical_severity",
+          "pos": "42:19",
+          "args": [
+            "severity"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "summary.trim",
+          "pos": "43:18",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "parse_osv",
+      "source_name": "parse_osv",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "osv.capa:46:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<List<Advisory>, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "parse_headed",
+          "pos": "47:22",
+          "args": [
+            "text"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "49:26",
+          "args": [
+            "MalformedInput(error_message(e))"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "MalformedInput",
+          "pos": "49:30",
+          "args": [
+            "error_message(e)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "error_message",
+          "pos": "49:45",
+          "args": [
+            "e"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m8__required_columns",
+          "pos": "50:16",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "view.has_column",
+          "pos": "51:16",
+          "args": [
+            "col"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "52:20",
+          "args": [
+            "MissingColumn(col)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "MissingColumn",
+          "pos": "52:24",
+          "args": [
+            "col"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "view.length",
+          "pos": "56:15",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m8__build_advisory",
+          "pos": "57:17",
+          "args": [
+            "view",
+            "i"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "advisories.push",
+          "pos": "58:9",
+          "args": [
+            "a"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "60:12",
+          "args": [
+            "advisories"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "cross_reference",
+      "source_name": "cross_reference",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "osv.capa:64:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "deps",
+          "type": "List<Dependency>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "advisories",
+          "type": "List<Advisory>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "List<VulnFinding>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "findings.push",
+          "pos": "69:17",
+          "args": [
+            "VulnFinding { dep: dep, advisory: adv }"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "passed",
+      "source_name": "passed",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "risk.capa:28:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "s",
+          "type": "RiskSummary",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Bool",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "summarise",
+      "source_name": "summarise",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "risk.capa:31:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "total_deps",
+          "type": "Int",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "licenses",
+          "type": "List<LicenseFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "vulns",
+          "type": "List<VulnFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "RiskSummary",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "is_violation",
+          "pos": "40:12",
+          "args": [
+            "f"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "needs_review",
+          "pos": "42:14",
+          "args": [
+            "f"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "severity_rank",
+          "pos": "54:17",
+          "args": [
+            "v.advisory.severity"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m10__verdict_line",
+      "source_name": "verdict_line",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 10,
+      "pos": "report.capa:16:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "s",
+          "type": "RiskSummary",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "passed",
+          "pos": "17:8",
+          "args": [
+            "s"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m10__summary_section",
+      "source_name": "summary_section",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 10,
+      "pos": "report.capa:21:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "s",
+          "type": "RiskSummary",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m10__license_violations_section",
+      "source_name": "license_violations_section",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 10,
+      "pos": "report.capa:29:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "findings",
+          "type": "List<LicenseFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "is_violation",
+          "pos": "33:12",
+          "args": [
+            "f"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "dep_coordinate",
+          "pos": "35:45",
+          "args": [
+            "f.dep"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m10__license_review_section",
+      "source_name": "license_review_section",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 10,
+      "pos": "report.capa:42:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "findings",
+          "type": "List<LicenseFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "needs_review",
+          "pos": "46:12",
+          "args": [
+            "f"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "dep_coordinate",
+          "pos": "48:35",
+          "args": [
+            "f.dep"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m10__vuln_section",
+      "source_name": "vuln_section",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 10,
+      "pos": "report.capa:55:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "vulns",
+          "type": "List<VulnFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "vulns.length",
+          "pos": "57:8",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "dep_coordinate",
+          "pos": "61:65",
+          "args": [
+            "v.dep"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m10__remediation_section",
+      "source_name": "remediation_section",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 10,
+      "pos": "report.capa:65:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "licenses",
+          "type": "List<LicenseFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "vulns",
+          "type": "List<VulnFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "s",
+          "type": "RiskSummary",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "passed",
+          "pos": "71:8",
+          "args": [
+            "s"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "is_violation",
+          "pos": "75:12",
+          "args": [
+            "f"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "build_report",
+      "source_name": "build_report",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "report.capa:83:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "repo_label",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "licenses",
+          "type": "List<LicenseFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "vulns",
+          "type": "List<VulnFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "s",
+          "type": "RiskSummary",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "_capa_m10__verdict_line",
+          "pos": "92:16",
+          "args": [
+            "s"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m10__summary_section",
+          "pos": "93:16",
+          "args": [
+            "s"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m10__license_violations_section",
+          "pos": "94:16",
+          "args": [
+            "licenses"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m10__license_review_section",
+          "pos": "95:16",
+          "args": [
+            "licenses"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m10__vuln_section",
+          "pos": "96:16",
+          "args": [
+            "vulns"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m10__remediation_section",
+          "pos": "97:16",
+          "args": [
+            "licenses",
+            "vulns",
+            "s"
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m11__esc",
+      "source_name": "esc",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 11,
+      "pos": "sbom.capa:19:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "s",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "s.length",
+          "pos": "22:15",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "method",
+          "callee": "s.substring",
+          "pos": "23:17",
+          "args": [
+            "i",
+            "i + 1"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m11__component_json",
+      "source_name": "component_json",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 11,
+      "pos": "sbom.capa:33:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "dep",
+          "type": "Dependency",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__esc",
+          "pos": "36:34",
+          "args": [
+            "dep.name"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__esc",
+          "pos": "37:37",
+          "args": [
+            "dep.version"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__esc",
+          "pos": "38:34",
+          "args": [
+            "dep_coordinate(dep)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "dep_coordinate",
+          "pos": "38:38",
+          "args": [
+            "dep"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__esc",
+          "pos": "39:64",
+          "args": [
+            "dep.license"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m11__components_json",
+      "source_name": "components_json",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 11,
+      "pos": "sbom.capa:43:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "deps",
+          "type": "List<Dependency>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__component_json",
+          "pos": "51:20",
+          "args": [
+            "dep"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m11__vuln_json",
+      "source_name": "vuln_json",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 11,
+      "pos": "sbom.capa:55:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "v",
+          "type": "VulnFinding",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__esc",
+          "pos": "57:32",
+          "args": [
+            "v.advisory.id"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__esc",
+          "pos": "58:49",
+          "args": [
+            "dep_coordinate(v.dep)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "dep_coordinate",
+          "pos": "58:53",
+          "args": [
+            "v.dep"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__esc",
+          "pos": "59:54",
+          "args": [
+            "v.advisory.severity"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__esc",
+          "pos": "60:41",
+          "args": [
+            "v.advisory.summary"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "_capa_m11__vulnerabilities_json",
+      "source_name": "vulnerabilities_json",
+      "container": null,
+      "source_container": null,
+      "source_module_index": 11,
+      "pos": "sbom.capa:64:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "vulns",
+          "type": "List<VulnFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "vulns.length",
+          "pos": "65:8",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__vuln_json",
+          "pos": "74:20",
+          "args": [
+            "v"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "build_sbom",
+      "source_name": "build_sbom",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "sbom.capa:81:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "serial",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "deps",
+          "type": "List<Dependency>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "vulns",
+          "type": "List<VulnFinding>",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__esc",
+          "pos": "86:90",
+          "args": [
+            "serial"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__components_json",
+          "pos": "87:16",
+          "args": [
+            "deps"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "_capa_m11__vulnerabilities_json",
+          "pos": "88:16",
+          "args": [
+            "vulns"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "audit_texts",
+      "source_name": "audit_texts",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "licenseaudit.capa:52:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "lock_text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "policy_text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        },
+        {
+          "name": "osv_text",
+          "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<AuditResult, AuditError>",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "fn",
+          "callee": "parse_lockfile",
+          "pos": "57:16",
+          "args": [
+            "lock_text"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "parse_policy",
+          "pos": "58:15",
+          "args": [
+            "policy_text"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "parse_osv",
+          "pos": "59:22",
+          "args": [
+            "osv_text"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "evaluate_licenses",
+          "pos": "60:20",
+          "args": [
+            "pol",
+            "deps"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "cross_reference",
+          "pos": "61:17",
+          "args": [
+            "deps",
+            "advisories"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "summarise",
+          "pos": "62:19",
+          "args": [
+            "deps.length()",
+            "licenses",
+            "vulns"
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "deps.length",
+          "pos": "62:34",
+          "args": [],
+          "args_flow": []
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "63:12",
+          "args": [
+            "AuditResult { deps: deps, licenses: licenses, vulns: vulns, summary: summary }"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "run_violating",
+      "source_name": "run_violating",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "licenseaudit.capa:79:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "ro",
+          "type": "ReadOnlyFs",
+          "consuming": false,
+          "is_capability": true,
+          "is_linear": false
+        },
+        {
+          "name": "fs_out",
+          "type": "Fs",
+          "consuming": false,
+          "is_capability": true,
+          "is_linear": false
+        },
+        {
+          "name": "stdio",
+          "type": "Stdio",
+          "consuming": false,
+          "is_capability": true,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<Bool, AuditError>",
+      "declared_capabilities": [
+        "ReadOnlyFs",
+        "Fs",
+        "Stdio"
+      ],
+      "transitively_reachable_capabilities": [
+        "Fs",
+        "ReadOnlyFs",
+        "Stdio"
+      ],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Net",
+        "Proc",
+        "Random",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "ro.read",
+          "pos": "80:22",
+          "args": [
+            "\"data/violating_repo/dependencies.lock.csv\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "82:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "82:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "ro.read",
+          "pos": "83:21",
+          "args": [
+            "\"data/policy.csv\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "85:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "85:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "ro.read",
+          "pos": "86:22",
+          "args": [
+            "\"data/osv.csv\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "88:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "88:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "audit_texts",
+          "pos": "90:15",
+          "args": [
+            "lock",
+            "pol",
+            "feed"
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "build_report",
+          "pos": "91:16",
+          "args": [
+            "\"violating_repo\"",
+            "res.licenses",
+            "res.vulns",
+            "res.summary"
+          ],
+          "args_flow": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "fs_out.write",
+          "pos": "92:11",
+          "args": [
+            "\"out/violating_report.txt\"",
+            "body"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "94:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "94:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "build_sbom",
+          "pos": "95:15",
+          "args": [
+            "\"violating_repo\"",
+            "res.deps",
+            "res.vulns"
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "fs_out.write",
+          "pos": "96:11",
+          "args": [
+            "\"out/violating_sbom.cyclonedx.json\"",
+            "bom"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "98:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "98:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "passed",
+          "pos": "100:14",
+          "args": [
+            "res.summary"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "stdio.println",
+          "pos": "101:5",
+          "args": [
+            "\"  violating_repo: ${...} (${...} license violations, ${...} vulns)\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "verdict_word",
+          "pos": "101:40",
+          "args": [
+            "ok"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "102:12",
+          "args": [
+            "ok"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "run_clean",
+      "source_name": "run_clean",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "licenseaudit.capa:105:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "ro",
+          "type": "ReadOnlyFs",
+          "consuming": false,
+          "is_capability": true,
+          "is_linear": false
+        },
+        {
+          "name": "fs_out",
+          "type": "Fs",
+          "consuming": false,
+          "is_capability": true,
+          "is_linear": false
+        },
+        {
+          "name": "stdio",
+          "type": "Stdio",
+          "consuming": false,
+          "is_capability": true,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Result<Bool, AuditError>",
+      "declared_capabilities": [
+        "ReadOnlyFs",
+        "Fs",
+        "Stdio"
+      ],
+      "transitively_reachable_capabilities": [
+        "Fs",
+        "ReadOnlyFs",
+        "Stdio"
+      ],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Net",
+        "Proc",
+        "Random",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "ro.read",
+          "pos": "106:22",
+          "args": [
+            "\"data/clean_repo/dependencies.lock.csv\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "108:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "108:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "ro.read",
+          "pos": "109:21",
+          "args": [
+            "\"data/policy.csv\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "111:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "111:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "ro.read",
+          "pos": "112:22",
+          "args": [
+            "\"data/osv.csv\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "114:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "114:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "audit_texts",
+          "pos": "116:15",
+          "args": [
+            "lock",
+            "pol",
+            "feed"
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "build_report",
+          "pos": "117:16",
+          "args": [
+            "\"clean_repo\"",
+            "res.licenses",
+            "res.vulns",
+            "res.summary"
+          ],
+          "args_flow": [
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "fs_out.write",
+          "pos": "118:11",
+          "args": [
+            "\"out/clean_report.txt\"",
+            "body"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "120:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "120:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "build_sbom",
+          "pos": "121:15",
+          "args": [
+            "\"clean_repo\"",
+            "res.deps",
+            "res.vulns"
+          ],
+          "args_flow": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "fs_out.write",
+          "pos": "122:11",
+          "args": [
+            "\"out/clean_sbom.cyclonedx.json\"",
+            "bom"
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Err",
+          "pos": "124:26",
+          "args": [
+            "Io(\"${...}\")"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Io",
+          "pos": "124:30",
+          "args": [
+            "\"${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "passed",
+          "pos": "126:14",
+          "args": [
+            "res.summary"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "stdio.println",
+          "pos": "127:5",
+          "args": [
+            "\"  clean_repo: ${...} (${...} license violations, ${...} vulns)\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "verdict_word",
+          "pos": "127:36",
+          "args": [
+            "ok"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "Ok",
+          "pos": "128:12",
+          "args": [
+            "ok"
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "verdict_word",
+      "source_name": "verdict_word",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "licenseaudit.capa:130:1",
+      "is_pub": false,
+      "doc": null,
+      "params": [
+        {
+          "name": "ok",
+          "type": "Bool",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "String",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [],
+      "declassifications": []
+    },
+    {
+      "name": "main",
+      "source_name": "main",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "licenseaudit.capa:135:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "stdio",
+          "type": "Stdio",
+          "consuming": false,
+          "is_capability": true,
+          "is_linear": false
+        },
+        {
+          "name": "fs",
+          "type": "Fs",
+          "consuming": false,
+          "is_capability": true,
+          "is_linear": false
+        }
+      ],
+      "return_type": "()",
+      "declared_capabilities": [
+        "Stdio",
+        "Fs"
+      ],
+      "transitively_reachable_capabilities": [
+        "Fs",
+        "Stdio"
+      ],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "stdio.println",
+          "pos": "136:5",
+          "args": [
+            "\"== capa_licenseaudit: license + vulnerability auditor ==\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "make_read_view",
+          "pos": "142:14",
+          "args": [
+            "fs",
+            "\"data/\""
+          ],
+          "args_flow": [
+            null,
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "fs.restrict_to",
+          "pos": "143:18",
+          "args": [
+            "\"out/\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "run_violating",
+          "pos": "145:11",
+          "args": [
+            "ro",
+            "fs_out",
+            "stdio"
+          ],
+          "args_flow": [
+            null,
+            {
+              "name": "fs_out",
+              "attenuations": [
+                {
+                  "method": "restrict_to",
+                  "args": [
+                    "\"out/\""
+                  ]
+                }
+              ]
+            },
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "stdio.eprintln",
+          "pos": "147:26",
+          "args": [
+            "\"violating audit failed: ${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "audit_error_message",
+          "pos": "147:68",
+          "args": [
+            "e"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "run_clean",
+          "pos": "149:11",
+          "args": [
+            "ro",
+            "fs_out",
+            "stdio"
+          ],
+          "args_flow": [
+            null,
+            {
+              "name": "fs_out",
+              "attenuations": [
+                {
+                  "method": "restrict_to",
+                  "args": [
+                    "\"out/\""
+                  ]
+                }
+              ]
+            },
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "stdio.eprintln",
+          "pos": "151:26",
+          "args": [
+            "\"clean audit failed: ${...}\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "audit_error_message",
+          "pos": "151:64",
+          "args": [
+            "e"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "stdio.println",
+          "pos": "153:5",
+          "args": [
+            "\"reports and audited-project SBOMs written under out/\""
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "method",
+          "callee": "stdio.println",
+          "pos": "154:5",
+          "args": [
+            "\"the auditor holds a read-only view of data/ (proved by capa --check; see lea..."
+          ],
+          "args_flow": [
+            null
+          ]
+        }
+      ],
+      "declassifications": []
+    }
+  ],
+  "operator_declared_grants": {
+    "trust_level": "operator-declared",
+    "note": "Authority declared by the operator at build/run time (e.g. --preopen). DISTINCT from the compiler-derived, program-proven capability surface; the compiler could not derive these grants.",
+    "preopens": []
+  },
+  "compiler_derived_path_arg_surface": {
+    "trust_level": "compiler-derived",
+    "note": "argv (env.args()) arguments the compiler PROVED reach an Fs / Net / Env sink, and whether read or write. A sound over-approximation (no reaching argument omitted; arg_index '*' when the concrete index is not statically determinate). Closures are covered SOUND BY CONSTRUCTION: a closure whose parameter reaches a sink is reported at '*' UNLESS the compiler proves it is applied only locally to non-argv values -- so a closure that escapes its frame (returned, passed to a helper, stored in an aggregate, or reached through a match/if arm or a name bound to one) fails closed, with no per-shape enumeration. Scope is EXHAUSTIVELY covered: the statement traversal descends into EVERY sub-scope that holds sub-statements -- if/while/for statement blocks, match-arm blocks, and lambda bodies, at any nesting depth -- so a binding or sink in any sub-block (including a match-arm block) is never skipped (pinned by a meta-test over the AST node inventory). RESIDUAL (the one honest gap, VALUE-FLOW only): a closure carried by a value the AST-level pass cannot statically tie back to a lambda -- re-extracted from a runtime container by key, or threaded through an opaque computed value -- may be under-reported. This does NOT grant authority -- a dynamic Fs/Net path still fail-closes in --wasi without --preopen; it is an auditable fact, distinct from operator_declared_grants.",
+    "arguments": []
+  },
+  "summary": {
+    "total_functions": 59,
+    "functions_with_capabilities": 5,
+    "functions_with_attributes": 0,
+    "functions_crossing_unsafe": 0,
+    "declassification_sites": 0,
+    "protocol_states": 0
+  }
+}

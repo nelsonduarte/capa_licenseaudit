@@ -1,0 +1,79 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": { "component": { "type": "application", "name": "clean_repo" } },
+  "components": [
+    {
+      "type": "library",
+      "name": "left-pad",
+      "version": "1.3.1",
+      "purl": "pkg:npm/left-pad@1.3.1",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "lodash",
+      "version": "4.17.21",
+      "purl": "pkg:npm/lodash@4.17.21",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "serde",
+      "version": "1.0.203",
+      "purl": "pkg:cargo/serde@1.0.203",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }]
+    },
+    {
+      "type": "library",
+      "name": "minimist",
+      "version": "1.2.6",
+      "purl": "pkg:npm/minimist@1.2.6",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "requests",
+      "version": "2.32.3",
+      "purl": "pkg:pypi/requests@2.32.3",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }]
+    },
+    {
+      "type": "library",
+      "name": "pyyaml",
+      "version": "6.0.1",
+      "purl": "pkg:pypi/pyyaml@6.0.1",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "tokio",
+      "version": "1.36.0",
+      "purl": "pkg:cargo/tokio@1.36.0",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "zlib-sys",
+      "version": "1.2.13",
+      "purl": "pkg:cargo/zlib-sys@1.2.13",
+      "licenses": [{ "license": { "id": "Zlib" } }]
+    },
+    {
+      "type": "library",
+      "name": "clap",
+      "version": "4.5.4",
+      "purl": "pkg:cargo/clap@4.5.4",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }]
+    },
+    {
+      "type": "library",
+      "name": "chrono",
+      "version": "0.4.38",
+      "purl": "pkg:cargo/chrono@0.4.38",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }]
+    }
+  ],
+  "vulnerabilities": []
+}

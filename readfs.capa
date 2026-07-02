@@ -1,0 +1,45 @@
+// readfs.capa
+//
+// The central Capa guarantee of LicenseAudit: an auditor that can only
+// READ the repository it audits, proven at compile time.
+//
+// `ReadOnlyFs` is a user-defined capability that exposes exactly one
+// method, `read`. It has no `write`, no `remove`, no mutating operation of
+// any kind. Every part of LicenseAudit that touches the audited repo takes
+// a `ReadOnlyFs`, never a raw `Fs`. Because a capability's surface is its
+// method set, a holder of `ReadOnlyFs` CANNOT mutate the audited tree: the
+// call `ro.write(...)` is not a runtime failure, it does not type-check.
+// leaky_licenseaudit.capa is the counter-example that makes the compiler
+// say so.
+//
+// The bridge from the real filesystem to this read-only view is
+// `make_read_view`: it takes the built-in `Fs`, narrows it to a single
+// directory prefix with `restrict_to`, and hands back a `ReadOnlyFs`. The
+// underlying `Fs` is sealed inside the implementor struct's private field;
+// a holder of the abstract `ReadOnlyFs` has no path back to it, so it can
+// neither widen the prefix nor recover the write method. Two independent
+// walls: path attenuation (can only see the audited dir) and method
+// attenuation (can only read).
+
+// The abstract read-only filesystem capability. One method, read; nothing
+// that mutates. This is the whole authority the auditor holds over the
+// repository under audit.
+pub capability ReadOnlyFs
+    fun read(self, path: String) -> Result<String, IoError>
+
+// The concrete implementor. It holds a built-in `Fs` in a private field
+// (the cap-bearing-struct relaxation permits this precisely because the
+// struct implements a user-defined capability). Nothing outside this
+// module can read `fs` back out, so the sealed `Fs` cannot leak.
+type FsReadView {
+    fs: Fs
+}
+
+impl ReadOnlyFs for FsReadView
+    fun read(self, path: String) -> Result<String, IoError>
+        return self.fs.read(path)
+
+// The bridge: narrow the real `Fs` to a directory prefix and expose it as
+// a read-only view. Callers downstream never see the raw `Fs` again.
+pub fun make_read_view(fs: Fs, prefix: String) -> FsReadView
+    return FsReadView { fs: fs.restrict_to(prefix) }

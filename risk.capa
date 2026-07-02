@@ -1,0 +1,74 @@
+// risk.capa
+//
+// Fold the license findings and the vulnerability findings into a single
+// risk summary: the counts a decision-maker acts on, plus a gate verdict.
+//
+// The verdict is fail-closed: the audit PASSES only when there are zero
+// license violations (deny + unknown) and zero vulnerability findings. A
+// license that merely needs review does not fail the gate on its own, but
+// it is surfaced so it cannot ship unnoticed. Everything here is pure
+// aggregation over the findings; zero capabilities.
+
+import domain
+
+pub type RiskSummary {
+    total_deps: Int,
+    license_violations: Int,
+    license_reviews: Int,
+    license_ok: Int,
+    vulns_total: Int,
+    vulns_critical: Int,
+    vulns_high: Int,
+    vulns_medium: Int,
+    vulns_low: Int
+}
+
+// True when nothing blocks the gate: no license violations and no known
+// vulnerabilities.
+pub fun passed(s: RiskSummary) -> Bool
+    return s.license_violations == 0 and s.vulns_total == 0
+
+pub fun summarise(
+    total_deps: Int,
+    licenses: List<LicenseFinding>,
+    vulns: List<VulnFinding>
+) -> RiskSummary
+    var violations = 0
+    var reviews = 0
+    var ok = 0
+    for f in licenses
+        if is_violation(f)
+            violations = violations + 1
+        elif needs_review(f)
+            reviews = reviews + 1
+        else
+            ok = ok + 1
+
+    var vt = 0
+    var vc = 0
+    var vh = 0
+    var vm = 0
+    var vl = 0
+    for v in vulns
+        vt = vt + 1
+        let r = severity_rank(v.advisory.severity)
+        if r == 4
+            vc = vc + 1
+        elif r == 3
+            vh = vh + 1
+        elif r == 2
+            vm = vm + 1
+        else
+            vl = vl + 1
+
+    return RiskSummary {
+        total_deps: total_deps,
+        license_violations: violations,
+        license_reviews: reviews,
+        license_ok: ok,
+        vulns_total: vt,
+        vulns_critical: vc,
+        vulns_high: vh,
+        vulns_medium: vm,
+        vulns_low: vl
+    }

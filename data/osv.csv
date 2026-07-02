@@ -1,0 +1,7 @@
+id,package,version,severity,summary
+OSV-2021-0043,minimist,1.2.5,high,prototype pollution via crafted argument key
+OSV-2020-0512,pyyaml,5.3.1,critical,arbitrary code execution in full_load with untrusted input
+GHSA-jf85-cpcp-j695,log4shell-demo,2.14.1,critical,remote code execution via JNDI lookup (Log4Shell-class)
+OSV-2019-0987,left-pad,1.3.0,low,denial of service on extremely large pad length
+GHSA-xxxx-image,image-magick-bind,1.0.2,medium,out-of-bounds read parsing malformed image headers
+OSV-2022-0777,requests,2.31.0,medium,proxy-authorization header leak on cross-origin redirect

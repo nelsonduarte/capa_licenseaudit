@@ -1,0 +1,87 @@
+// policy.capa
+//
+// Parse the organisation's license policy and evaluate every dependency's
+// declared license against it. This is the PRIMARY axis of LicenseAudit.
+//
+// The policy is a CSV allow/review/deny list keyed by SPDX id, with a
+// category (permissive / weak-copyleft / strong-copyleft / ...) and a
+// human note per entry. Evaluation is a pure lookup:
+//
+//   * a license the policy marks `deny`  -> a violation (typically strong
+//     or network copyleft in a proprietary product: GPL-3.0, AGPL-3.0).
+//   * a license the policy marks `review` -> a gate that needs a recorded
+//     human decision (weak copyleft: MPL-2.0, LGPL-2.1).
+//   * a license the policy marks `allow`  -> conformant (permissive).
+//   * a license the policy does not list at all -> `unknown`, treated as a
+//     violation to fail closed: an un-triaged license never ships silently.
+//
+// Zero capabilities: pure parsing and evaluation over text and data.
+
+import domain
+import capa_csv.model
+import capa_csv.header
+
+fun required_columns() -> List<String>
+    return ["spdx", "disposition", "category", "note"]
+
+fun cell(view: HeaderTable, idx: Int, column: String) -> Result<String, AuditError>
+    return match view.get(idx, column)
+        Ok(v)  -> Ok(v)
+        Err(_) -> Err(MalformedInput("policy row ${idx} is missing column '${column}'"))
+
+fun build_entry(view: HeaderTable, idx: Int) -> Result<PolicyEntry, AuditError>
+    let spdx     = cell(view, idx, "spdx")?
+    let disp     = cell(view, idx, "disposition")?
+    let category = cell(view, idx, "category")?
+    let note     = cell(view, idx, "note")?
+    return Ok(PolicyEntry {
+        spdx: spdx.trim(),
+        disposition: canonical_disposition(disp),
+        category: category.trim(),
+        note: note.trim()
+    })
+
+pub fun parse_policy(text: String) -> Result<Policy, AuditError>
+    let view = match parse_headed(text)
+        Ok(v)  -> v
+        Err(e) -> return Err(MalformedInput(error_message(e)))
+    for col in required_columns()
+        if not view.has_column(col)
+            return Err(MissingColumn(col))
+    if view.length() == 0
+        return Err(EmptyDataset("license policy"))
+    var entries: List<PolicyEntry> = []
+    var i = 0
+    while i < view.length()
+        let e = build_entry(view, i)?
+        entries.push(e)
+        i = i + 1
+    return Ok(Policy { entries: entries })
+
+// Look up one SPDX id in the policy. A license absent from the policy is
+// `Unknown` with an explanatory note (fail closed).
+fun evaluate_one(policy: Policy, dep: Dependency) -> LicenseFinding
+    for entry in policy.entries
+        if entry.spdx == dep.license
+            return LicenseFinding {
+                dep: dep,
+                disposition: entry.disposition,
+                category: entry.category,
+                note: entry.note
+            }
+    return LicenseFinding {
+        dep: dep,
+        disposition: "unknown",
+        category: "unclassified",
+        note: "license id is not listed in the policy; triage required before shipping"
+    }
+
+// Evaluate every dependency against the policy, preserving lockfile order
+// for stable, backend-identical output. The is_violation / needs_review
+// predicates live in domain.capa (the single source of truth for the
+// disposition tokens).
+pub fun evaluate_licenses(policy: Policy, deps: List<Dependency>) -> List<LicenseFinding>
+    var findings: List<LicenseFinding> = []
+    for dep in deps
+        findings.push(evaluate_one(policy, dep))
+    return findings

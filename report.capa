@@ -1,0 +1,98 @@
+// report.capa
+//
+// Build the human-readable compliance report string. Deterministic and
+// identical across backends: no clock, no randomness, findings in
+// lockfile order. Pure string construction; zero capabilities. The caller
+// writes it through the attenuated (write) Fs at an inline literal sink.
+//
+// The report has four sections: the risk summary a decision-maker reads
+// first, then the license violations (primary axis), the licenses awaiting
+// review, the vulnerable dependencies (secondary axis), and a remediation
+// checklist that turns findings into actions.
+
+import domain
+import risk
+
+fun verdict_line(s: RiskSummary) -> String
+    if passed(s)
+        return "VERDICT: PASS (no license violations, no known vulnerabilities)\n"
+    return "VERDICT: FAIL (compliance gate blocked; see findings below)\n"
+
+fun summary_section(s: RiskSummary) -> String
+    var t = "== Risk summary ==\n"
+    t = "${t}  dependencies audited: ${s.total_deps}\n"
+    t = "${t}  license: ${s.license_ok} ok, ${s.license_reviews} review, ${s.license_violations} violation\n"
+    t = "${t}  vulnerabilities: ${s.vulns_total} total"
+    t = "${t} (critical=${s.vulns_critical} high=${s.vulns_high} medium=${s.vulns_medium} low=${s.vulns_low})\n"
+    return t
+
+fun license_violations_section(findings: List<LicenseFinding>) -> String
+    var t = "== License violations ==\n"
+    var any = false
+    for f in findings
+        if is_violation(f)
+            any = true
+            t = "${t}  [${f.disposition}] ${dep_coordinate(f.dep)}\n"
+            t = "${t}      license=${f.dep.license} category=${f.category}\n"
+            t = "${t}      reason: ${f.note}\n"
+    if not any
+        t = "${t}  (none)\n"
+    return t
+
+fun license_review_section(findings: List<LicenseFinding>) -> String
+    var t = "== Licenses awaiting review ==\n"
+    var any = false
+    for f in findings
+        if needs_review(f)
+            any = true
+            t = "${t}  [review] ${dep_coordinate(f.dep)}\n"
+            t = "${t}      license=${f.dep.license} category=${f.category}\n"
+            t = "${t}      note: ${f.note}\n"
+    if not any
+        t = "${t}  (none)\n"
+    return t
+
+fun vuln_section(vulns: List<VulnFinding>) -> String
+    var t = "== Vulnerable dependencies ==\n"
+    if vulns.length() == 0
+        t = "${t}  (none)\n"
+        return t
+    for v in vulns
+        t = "${t}  [${v.advisory.severity}] ${v.advisory.id}  ${dep_coordinate(v.dep)}\n"
+        t = "${t}      ${v.advisory.summary}\n"
+    return t
+
+fun remediation_section(
+    licenses: List<LicenseFinding>,
+    vulns: List<VulnFinding>,
+    s: RiskSummary
+) -> String
+    var t = "== Remediation checklist ==\n"
+    if passed(s)
+        t = "${t}  [ ] nothing to remediate; the audit passes as pinned\n"
+        return t
+    for f in licenses
+        if is_violation(f)
+            t = "${t}  [ ] replace or re-license ${f.dep.name} (${f.dep.license}); "
+            t = "${t}disposition=${f.disposition}\n"
+    for v in vulns
+        t = "${t}  [ ] upgrade ${v.dep.name} past ${v.dep.version} (fixes ${v.advisory.id}, ${v.advisory.severity})\n"
+    return t
+
+// The full compliance report as one string.
+pub fun build_report(
+    repo_label: String,
+    licenses: List<LicenseFinding>,
+    vulns: List<VulnFinding>,
+    s: RiskSummary
+) -> String
+    var t = "LicenseAudit compliance report\n"
+    t = "${t}==============================\n"
+    t = "${t}audited repository: ${repo_label}\n\n"
+    t = "${t}${verdict_line(s)}\n"
+    t = "${t}${summary_section(s)}\n"
+    t = "${t}${license_violations_section(licenses)}\n"
+    t = "${t}${license_review_section(licenses)}\n"
+    t = "${t}${vuln_section(vulns)}\n"
+    t = "${t}${remediation_section(licenses, vulns, s)}"
+    return t

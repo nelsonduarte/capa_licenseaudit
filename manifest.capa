@@ -1,0 +1,61 @@
+// manifest.capa
+//
+// Parse a resolved dependency lockfile into the domain `Dependency` model,
+// threading Result across every fallible step.
+//
+// The lockfile is a flattened, ecosystem-neutral CSV: one row per resolved
+// dependency, with the name, pinned version, declared SPDX license and the
+// source ecosystem. Real lockfiles come in many shapes (package-lock.json,
+// Cargo.lock, requirements.txt with hashes); a monorepo auditor normalises
+// them into exactly this shape before the compliance pass. We parse the
+// normalised form robustly with the pure `capa_csv` RFC 4180 reader, so a
+// quoted license expression or a comma in a field never corrupts a row.
+//
+// Zero capabilities: this module works on text already read by the caller
+// through the attenuated ReadOnlyFs. Keeping the reader and the parser
+// apart is deliberate least-privilege.
+
+import domain
+import capa_csv.model
+import capa_csv.header
+
+// The columns a normalised lockfile must carry.
+fun required_columns() -> List<String>
+    return ["name", "version", "license", "ecosystem"]
+
+fun cell(view: HeaderTable, idx: Int, column: String) -> Result<String, AuditError>
+    return match view.get(idx, column)
+        Ok(v)  -> Ok(v)
+        Err(_) -> Err(MalformedInput("lockfile row ${idx} is missing column '${column}'"))
+
+fun build_dependency(view: HeaderTable, idx: Int) -> Result<Dependency, AuditError>
+    let name      = cell(view, idx, "name")?
+    let version   = cell(view, idx, "version")?
+    let license   = cell(view, idx, "license")?
+    let ecosystem = cell(view, idx, "ecosystem")?
+    return Ok(Dependency {
+        name: name.trim(),
+        version: version.trim(),
+        license: license.trim(),
+        ecosystem: ecosystem.trim()
+    })
+
+// Parse the whole lockfile. Verifies the header carries every required
+// column up front (a clear MissingColumn beats a per-row error), then
+// builds one Dependency per data row.
+pub fun parse_lockfile(text: String) -> Result<List<Dependency>, AuditError>
+    let view = match parse_headed(text)
+        Ok(v)  -> v
+        Err(e) -> return Err(MalformedInput(error_message(e)))
+    for col in required_columns()
+        if not view.has_column(col)
+            return Err(MissingColumn(col))
+    if view.length() == 0
+        return Err(EmptyDataset("dependency lockfile"))
+    var deps: List<Dependency> = []
+    var i = 0
+    while i < view.length()
+        let d = build_dependency(view, i)?
+        deps.push(d)
+        i = i + 1
+    return Ok(deps)

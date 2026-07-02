@@ -1,0 +1,22 @@
+LicenseAudit compliance report
+==============================
+audited repository: clean_repo
+
+VERDICT: PASS (no license violations, no known vulnerabilities)
+
+== Risk summary ==
+  dependencies audited: 10
+  license: 10 ok, 0 review, 0 violation
+  vulnerabilities: 0 total (critical=0 high=0 medium=0 low=0)
+
+== License violations ==
+  (none)
+
+== Licenses awaiting review ==
+  (none)
+
+== Vulnerable dependencies ==
+  (none)
+
+== Remediation checklist ==
+  [ ] nothing to remediate; the audit passes as pinned

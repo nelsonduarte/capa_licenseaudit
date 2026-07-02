@@ -1,0 +1,70 @@
+// osv.capa
+//
+// The SECONDARY axis: cross-reference each dependency at its pinned
+// version against a local OSV (Open Source Vulnerabilities) advisory feed.
+//
+// The feed is a flattened OSV export: one row per (advisory, affected
+// package, affected version), with an id, a severity and a summary. A real
+// pipeline would ingest the upstream OSV JSON; a monorepo auditor flattens
+// it to this shape (the affected-range resolution happens in the ingest
+// step, upstream of the compliance pass) so the match here is an exact
+// name+version join. Parsing is the same robust `capa_csv` reader.
+//
+// A dependency whose exact name and pinned version appear in the feed is a
+// vulnerability finding. Matching on the resolved version (not a range) is
+// deliberate: the lockfile has already resolved every version, so the
+// auditor reports precisely what is installed, with no range guesswork.
+//
+// Zero capabilities: pure parsing, evaluation and joining.
+
+import domain
+import capa_csv.model
+import capa_csv.header
+
+fun required_columns() -> List<String>
+    return ["id", "package", "version", "severity", "summary"]
+
+fun cell(view: HeaderTable, idx: Int, column: String) -> Result<String, AuditError>
+    return match view.get(idx, column)
+        Ok(v)  -> Ok(v)
+        Err(_) -> Err(MalformedInput("osv row ${idx} is missing column '${column}'"))
+
+fun build_advisory(view: HeaderTable, idx: Int) -> Result<Advisory, AuditError>
+    let id       = cell(view, idx, "id")?
+    let package  = cell(view, idx, "package")?
+    let version  = cell(view, idx, "version")?
+    let severity = cell(view, idx, "severity")?
+    let summary  = cell(view, idx, "summary")?
+    return Ok(Advisory {
+        id: id.trim(),
+        package: package.trim(),
+        version: version.trim(),
+        severity: canonical_severity(severity),
+        summary: summary.trim()
+    })
+
+pub fun parse_osv(text: String) -> Result<List<Advisory>, AuditError>
+    let view = match parse_headed(text)
+        Ok(v)  -> v
+        Err(e) -> return Err(MalformedInput(error_message(e)))
+    for col in required_columns()
+        if not view.has_column(col)
+            return Err(MissingColumn(col))
+    // An empty advisory feed is legal: it just means no known vulns.
+    var advisories: List<Advisory> = []
+    var i = 0
+    while i < view.length()
+        let a = build_advisory(view, i)?
+        advisories.push(a)
+        i = i + 1
+    return Ok(advisories)
+
+// Join dependencies against advisories on exact name + pinned version.
+// Preserves lockfile order for stable output.
+pub fun cross_reference(deps: List<Dependency>, advisories: List<Advisory>) -> List<VulnFinding>
+    var findings: List<VulnFinding> = []
+    for dep in deps
+        for adv in advisories
+            if adv.package == dep.name and adv.version == dep.version
+                findings.push(VulnFinding { dep: dep, advisory: adv })
+    return findings

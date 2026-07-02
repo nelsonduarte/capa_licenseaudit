@@ -1,0 +1,95 @@
+// capa_csv.model
+//
+// The typed model and error channel shared by the parser, the
+// header view, and the writer. Zero capabilities: everything
+// here is pure data and pure functions over Strings.
+//
+// A parsed document is a `Table`: a list of `Row`s, each a list
+// of String fields. Field values are the *decoded* text, with
+// surrounding quotes removed and doubled quotes collapsed to
+// single ones, exactly as RFC 4180 prescribes.
+
+// =========================================================
+// Dialect
+// =========================================================
+//
+// The one knob a v0.1 consumer needs: the field delimiter.
+// `comma()` and `tab()` cover the two formats in the wild;
+// `with_delimiter` takes an arbitrary single-character
+// delimiter for the rare third case (semicolon, pipe).
+//
+// The quote character is fixed to the double quote ("), which
+// is RFC 4180. Making it configurable is deferred (see README);
+// no real consumer of this library's downstream programs needs
+// anything else.
+
+pub type Dialect {
+    delimiter: String
+}
+
+/// The default RFC 4180 dialect: comma-delimited.
+pub fun comma() -> Dialect
+    return Dialect { delimiter: "," }
+
+/// Tab-separated values.
+pub fun tab() -> Dialect
+    return Dialect { delimiter: "\t" }
+
+/// A dialect with an arbitrary single-character delimiter. A
+/// delimiter that is not exactly one character, or that is the
+/// quote character itself, is a programming error the parser
+/// rejects with `BadDialect` rather than misbehaving silently.
+pub fun with_delimiter(delim: String) -> Dialect
+    return Dialect { delimiter: delim }
+
+// =========================================================
+// Table model
+// =========================================================
+
+/// One decoded record: its fields in column order.
+pub type Row {
+    fields: List<String>
+}
+
+/// A parsed CSV document: its records in file order.
+pub type Table {
+    rows: List<Row>
+}
+
+// =========================================================
+// Error channel
+// =========================================================
+//
+// The split is meaningful to callers:
+//   UnclosedQuote - a quoted field ran to end of input without
+//                   a closing quote (the classic malformed CSV)
+//   UnexpectedChar - a character appears where the grammar
+//                    forbids it (text immediately after a
+//                    closing quote, e.g. `"ab"c`)
+//   BadDialect    - the caller handed an unusable delimiter
+//   NoSuchColumn  - header view: a column name not in the header
+//   NoSuchRow     - header view: no data record at that index
+//                   (the row simply does not exist)
+//   ShortRow      - header view: the row exists but has fewer
+//                   fields than the header has columns, so the
+//                   named column has no value in this row
+
+pub type CsvError =
+    UnclosedQuote(Int)
+    UnexpectedChar(Int)
+    BadDialect(String)
+    NoSuchColumn(String)
+    NoSuchRow(Int)
+    ShortRow(String)
+
+/// A human-readable, backend-identical rendering of an error.
+/// Positions are 1-based record numbers, the unit an operator
+/// reasons about.
+pub fun error_message(e: CsvError) -> String
+    return match e
+        UnclosedQuote(rec)  -> "unclosed quoted field in record ${rec}"
+        UnexpectedChar(rec) -> "unexpected character after quoted field in record ${rec}"
+        BadDialect(m)       -> "bad dialect: ${m}"
+        NoSuchColumn(name)  -> "no such column: '${name}'"
+        NoSuchRow(idx)      -> "no such data row: index ${idx}"
+        ShortRow(name)      -> "row is too short to hold column '${name}'"

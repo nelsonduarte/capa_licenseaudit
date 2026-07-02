@@ -1,0 +1,137 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": { "component": { "type": "application", "name": "violating_repo" } },
+  "components": [
+    {
+      "type": "library",
+      "name": "left-pad",
+      "version": "1.3.0",
+      "purl": "pkg:npm/left-pad@1.3.0",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "lodash",
+      "version": "4.17.21",
+      "purl": "pkg:npm/lodash@4.17.21",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "serde",
+      "version": "1.0.203",
+      "purl": "pkg:cargo/serde@1.0.203",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }]
+    },
+    {
+      "type": "library",
+      "name": "readline-gnu",
+      "version": "8.2.0",
+      "purl": "pkg:cargo/readline-gnu@8.2.0",
+      "licenses": [{ "license": { "id": "GPL-3.0" } }]
+    },
+    {
+      "type": "library",
+      "name": "minimist",
+      "version": "1.2.5",
+      "purl": "pkg:npm/minimist@1.2.5",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "requests",
+      "version": "2.31.0",
+      "purl": "pkg:pypi/requests@2.31.0",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }]
+    },
+    {
+      "type": "library",
+      "name": "pyyaml",
+      "version": "5.3.1",
+      "purl": "pkg:pypi/pyyaml@5.3.1",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "copyleft-core",
+      "version": "2.4.0",
+      "purl": "pkg:npm/copyleft-core@2.4.0",
+      "licenses": [{ "license": { "id": "AGPL-3.0" } }]
+    },
+    {
+      "type": "library",
+      "name": "tokio",
+      "version": "1.36.0",
+      "purl": "pkg:cargo/tokio@1.36.0",
+      "licenses": [{ "license": { "id": "MIT" } }]
+    },
+    {
+      "type": "library",
+      "name": "log4shell-demo",
+      "version": "2.14.1",
+      "purl": "pkg:maven/log4shell-demo@2.14.1",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }]
+    },
+    {
+      "type": "library",
+      "name": "image-magick-bind",
+      "version": "1.0.2",
+      "purl": "pkg:cargo/image-magick-bind@1.0.2",
+      "licenses": [{ "license": { "id": "ImageMagick" } }]
+    },
+    {
+      "type": "library",
+      "name": "zlib-sys",
+      "version": "1.2.11",
+      "purl": "pkg:cargo/zlib-sys@1.2.11",
+      "licenses": [{ "license": { "id": "Zlib" } }]
+    },
+    {
+      "type": "library",
+      "name": "mozilla-cert-store",
+      "version": "0.9.1",
+      "purl": "pkg:cargo/mozilla-cert-store@0.9.1",
+      "licenses": [{ "license": { "id": "MPL-2.0" } }]
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "id": "OSV-2019-0987",
+      "affects": [{ "ref": "pkg:npm/left-pad@1.3.0" }],
+      "ratings": [{ "severity": "low" }],
+      "description": "denial of service on extremely large pad length"
+    },
+    {
+      "id": "OSV-2021-0043",
+      "affects": [{ "ref": "pkg:npm/minimist@1.2.5" }],
+      "ratings": [{ "severity": "high" }],
+      "description": "prototype pollution via crafted argument key"
+    },
+    {
+      "id": "OSV-2022-0777",
+      "affects": [{ "ref": "pkg:pypi/requests@2.31.0" }],
+      "ratings": [{ "severity": "medium" }],
+      "description": "proxy-authorization header leak on cross-origin redirect"
+    },
+    {
+      "id": "OSV-2020-0512",
+      "affects": [{ "ref": "pkg:pypi/pyyaml@5.3.1" }],
+      "ratings": [{ "severity": "critical" }],
+      "description": "arbitrary code execution in full_load with untrusted input"
+    },
+    {
+      "id": "GHSA-jf85-cpcp-j695",
+      "affects": [{ "ref": "pkg:maven/log4shell-demo@2.14.1" }],
+      "ratings": [{ "severity": "critical" }],
+      "description": "remote code execution via JNDI lookup (Log4Shell-class)"
+    },
+    {
+      "id": "GHSA-xxxx-image",
+      "affects": [{ "ref": "pkg:cargo/image-magick-bind@1.0.2" }],
+      "ratings": [{ "severity": "medium" }],
+      "description": "out-of-bounds read parsing malformed image headers"
+    }
+  ]
+}

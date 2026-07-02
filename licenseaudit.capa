@@ -1,0 +1,154 @@
+// licenseaudit.capa
+//
+// The LicenseAudit orchestrator, wired end to end:
+//
+//   read  (ReadOnlyFs over data/)     lockfile + policy + OSV feed
+//     -> parse   (manifest / policy / osv, pure)
+//     -> evaluate (policy conformance + OSV cross-reference, pure)
+//     -> summarise (risk.capa, pure)
+//     -> render  (report.capa + sbom.capa, pure)
+//     -> write   (Fs write over out/)  report + audited-project SBOM
+//     -> log     (Stdio)               one-line verdict per repo
+//
+// Capability discipline, two independent walls:
+//
+//   1. The repository under audit is reached ONLY through a `ReadOnlyFs`
+//      (readfs.capa). That capability has a `read` method and nothing
+//      else, so LicenseAudit provably cannot modify the tree it audits:
+//      an "auditor that only reads" is a compile-time fact. The write
+//      view over out/ is a SEPARATE, disjoint Fs; the two never mix.
+//
+//   2. main acquires exactly Stdio and Fs, and never Net, Env, Proc, Db,
+//      Clock, Random or Unsafe. The capability SBOM (capa --manifest)
+//      proves it, so "this auditor cannot phone home with what it read"
+//      is a checked fact.
+//
+// Every Fs sink (read and write) carries an INLINE string literal path,
+// and each write sink writes at its own literal rather than through a
+// shared writer (a multi-literal slot would defeat constant propagation).
+// The write view over out/ is thus statically known.
+//
+// The auditor's READS go through the ReadOnlyFs capability method, which
+// is exactly the point of the guarantee: the audited tree is reached only
+// via read. One consequence is that the stock --wasi backend does not run
+// this program in the current compiler: the static-preopen ceiling cannot
+// see the literal read path through the capability method, so it treats it
+// as dynamic, and the b1 WASI increment supports neither mixing literal
+// and dynamic paths nor two preopen directories. The program runs on the
+// Python, Wasm core and Wasm component backends; see the README for the
+// full rationale and the reported compiler limitation.
+
+import domain
+import readfs
+import manifest
+import policy
+import osv
+import risk
+import report
+import sbom
+
+// One audit result over already-read text: parse, evaluate, summarise.
+// Pure; the caller owns the I/O. Threads Result through every step.
+fun audit_texts(
+    lock_text: String,
+    policy_text: String,
+    osv_text: String
+) -> Result<AuditResult, AuditError>
+    let deps = manifest.parse_lockfile(lock_text)?
+    let pol = policy.parse_policy(policy_text)?
+    let advisories = osv.parse_osv(osv_text)?
+    let licenses = policy.evaluate_licenses(pol, deps)
+    let vulns = osv.cross_reference(deps, advisories)
+    let summary = risk.summarise(deps.length(), licenses, vulns)
+    return Ok(AuditResult {
+        deps: deps,
+        licenses: licenses,
+        vulns: vulns,
+        summary: summary
+    })
+
+type AuditResult {
+    deps: List<Dependency>,
+    licenses: List<LicenseFinding>,
+    vulns: List<VulnFinding>,
+    summary: RiskSummary
+}
+
+// Audit the VIOLATING sample repo. Every path is an inline literal at its
+// sink (read through ReadOnlyFs, write through the out/ Fs).
+fun run_violating(ro: ReadOnlyFs, fs_out: Fs, stdio: Stdio) -> Result<Bool, AuditError>
+    let lock = match ro.read("data/violating_repo/dependencies.lock.csv")
+        Ok(s)  -> s
+        Err(e) -> return Err(Io("${e}"))
+    let pol = match ro.read("data/policy.csv")
+        Ok(s)  -> s
+        Err(e) -> return Err(Io("${e}"))
+    let feed = match ro.read("data/osv.csv")
+        Ok(s)  -> s
+        Err(e) -> return Err(Io("${e}"))
+
+    let res = audit_texts(lock, pol, feed)?
+    let body = report.build_report("violating_repo", res.licenses, res.vulns, res.summary)
+    match fs_out.write("out/violating_report.txt", body)
+        Ok(_)  -> ()
+        Err(e) -> return Err(Io("${e}"))
+    let bom = sbom.build_sbom("violating_repo", res.deps, res.vulns)
+    match fs_out.write("out/violating_sbom.cyclonedx.json", bom)
+        Ok(_)  -> ()
+        Err(e) -> return Err(Io("${e}"))
+
+    let ok = passed(res.summary)
+    stdio.println("  violating_repo: ${verdict_word(ok)} (${res.summary.license_violations} license violations, ${res.summary.vulns_total} vulns)")
+    return Ok(ok)
+
+// Audit the CLEAN sample repo, same shape with its own literal paths.
+fun run_clean(ro: ReadOnlyFs, fs_out: Fs, stdio: Stdio) -> Result<Bool, AuditError>
+    let lock = match ro.read("data/clean_repo/dependencies.lock.csv")
+        Ok(s)  -> s
+        Err(e) -> return Err(Io("${e}"))
+    let pol = match ro.read("data/policy.csv")
+        Ok(s)  -> s
+        Err(e) -> return Err(Io("${e}"))
+    let feed = match ro.read("data/osv.csv")
+        Ok(s)  -> s
+        Err(e) -> return Err(Io("${e}"))
+
+    let res = audit_texts(lock, pol, feed)?
+    let body = report.build_report("clean_repo", res.licenses, res.vulns, res.summary)
+    match fs_out.write("out/clean_report.txt", body)
+        Ok(_)  -> ()
+        Err(e) -> return Err(Io("${e}"))
+    let bom = sbom.build_sbom("clean_repo", res.deps, res.vulns)
+    match fs_out.write("out/clean_sbom.cyclonedx.json", bom)
+        Ok(_)  -> ()
+        Err(e) -> return Err(Io("${e}"))
+
+    let ok = passed(res.summary)
+    stdio.println("  clean_repo: ${verdict_word(ok)} (${res.summary.license_violations} license violations, ${res.summary.vulns_total} vulns)")
+    return Ok(ok)
+
+fun verdict_word(ok: Bool) -> String
+    if ok
+        return "PASS"
+    return "FAIL"
+
+pub fun main(stdio: Stdio, fs: Fs)
+    stdio.println("== capa_licenseaudit: license + vulnerability auditor ==")
+
+    // Least privilege, two disjoint views. The audited repo is reached
+    // ONLY through a read-only capability; the report/SBOM outputs go to a
+    // separate write view over out/. The read-only view cannot write, and
+    // the write view is scoped out of the audited tree.
+    let ro = make_read_view(fs, "data/")
+    let fs_out = fs.restrict_to("out/")
+
+    match run_violating(ro, fs_out, stdio)
+        Ok(_)  -> ()
+        Err(e) -> return stdio.eprintln("violating audit failed: ${audit_error_message(e)}")
+
+    match run_clean(ro, fs_out, stdio)
+        Ok(_)  -> ()
+        Err(e) -> return stdio.eprintln("clean audit failed: ${audit_error_message(e)}")
+
+    stdio.println("reports and audited-project SBOMs written under out/")
+    stdio.println("the auditor holds a read-only view of data/ (proved by capa --check; see leaky_licenseaudit.capa)")

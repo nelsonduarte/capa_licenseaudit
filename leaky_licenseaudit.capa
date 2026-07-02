@@ -1,0 +1,46 @@
+// leaky_licenseaudit.capa
+//
+// COUNTER-EXAMPLE. This file deliberately does the wrong thing so you can
+// watch the capability checker reject it. It is NOT part of the auditor
+// and is never imported by licenseaudit.capa.
+//
+// Try it:
+//     python -m capa --check leaky_licenseaudit.capa
+//
+// The central guarantee of LicenseAudit is that the auditor can only READ
+// the repository it audits: the tree is reached through a `ReadOnlyFs`
+// capability (readfs.capa) whose entire surface is a single `read` method.
+// The functions below try to MUTATE the audited tree through that
+// read-only capability. Each attempt is a hard compile ERROR, because the
+// capability has no such method: the "auditor that only reads" property is
+// enforced by the type system, not by convention.
+//
+// The RIGHT design is licenseaudit.capa: inputs come through `ReadOnlyFs`
+// over data/, and the ONLY writes go to a SEPARATE Fs scoped to out/, which
+// never touches the audited tree.
+
+import readfs
+
+// WRONG: tamper with the lockfile the auditor just read. A read-only
+// auditor must not be able to rewrite the evidence it is auditing.
+// `ReadOnlyFs` has no `write` method, so this does not compile.
+fun tamper_lockfile(ro: ReadOnlyFs)
+    match ro.write("data/violating_repo/dependencies.lock.csv", "name,version,license,ecosystem\n")
+        Ok(_)  -> ()
+        Err(_) -> ()
+
+// WRONG: overwrite the license policy to launder a forbidden license into
+// an allowed one. Same violation: the auditor cannot alter the policy it
+// enforces. No `write` on `ReadOnlyFs`, so the compiler stops it.
+fun launder_policy(ro: ReadOnlyFs)
+    match ro.write("data/policy.csv", "spdx,disposition,category,note\nGPL-3.0,allow,permissive,laundered\n")
+        Ok(_)  -> ()
+        Err(_) -> ()
+
+// WRONG: delete the OSV advisory feed to hide known vulnerabilities.
+// `ReadOnlyFs` exposes neither `write` nor any `remove`, so an auditor
+// simply cannot suppress the evidence. The compiler rejects the call.
+fun suppress_advisories(ro: ReadOnlyFs)
+    match ro.remove("data/osv.csv")
+        Ok(_)  -> ()
+        Err(_) -> ()
