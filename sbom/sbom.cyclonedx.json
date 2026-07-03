@@ -1,7 +1,7 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:593f2e83-481e-5aa2-9a84-64e2015cea06",
+  "serialNumber": "urn:uuid:da7f260c-cf1f-5c0a-9e41-6304a7af7505",
   "version": 1,
   "metadata": {
     "timestamp": "2026-01-01T00:00:00Z",
@@ -31,7 +31,7 @@
       },
       {
         "name": "capa:summary:total_functions",
-        "value": "59"
+        "value": "61"
       },
       {
         "name": "capa:summary:functions_with_capabilities",
@@ -120,7 +120,7 @@
         },
         {
           "name": "capa:pos",
-          "value": "domain.capa:44:5"
+          "value": "domain.capa:43:5"
         },
         {
           "name": "capa:return_type",
@@ -196,11 +196,11 @@
         },
         {
           "name": "capa:pos",
-          "value": "domain.capa:57:5"
+          "value": "domain.capa:64:5"
         },
         {
           "name": "capa:return_type",
-          "value": "String"
+          "value": "Disp"
         },
         {
           "name": "capa:has_unsafe",
@@ -257,6 +257,82 @@
       ]
     },
     {
+      "bom-ref": "capa:fn:licenseaudit.capa:disposition_label",
+      "type": "library",
+      "name": "disposition_label",
+      "scope": "required",
+      "supplier": {
+        "name": "capa-build"
+      },
+      "licenses": [],
+      "properties": [
+        {
+          "name": "capa:kind",
+          "value": "function"
+        },
+        {
+          "name": "capa:pos",
+          "value": "domain.capa:75:5"
+        },
+        {
+          "name": "capa:return_type",
+          "value": "String"
+        },
+        {
+          "name": "capa:has_unsafe",
+          "value": "false"
+        },
+        {
+          "name": "capa:is_pub",
+          "value": "true"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Clock"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Db"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Env"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Fs"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Net"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Proc"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Random"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "ReadOnlyFs"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Stdio"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Unsafe"
+        },
+        {
+          "name": "capa:param",
+          "value": "d: Disp"
+        }
+      ]
+    },
+    {
       "bom-ref": "capa:fn:licenseaudit.capa:is_violation",
       "type": "library",
       "name": "is_violation",
@@ -272,7 +348,7 @@
         },
         {
           "name": "capa:pos",
-          "value": "domain.capa:90:5"
+          "value": "domain.capa:105:5"
         },
         {
           "name": "capa:return_type",
@@ -348,7 +424,7 @@
         },
         {
           "name": "capa:pos",
-          "value": "domain.capa:93:5"
+          "value": "domain.capa:112:5"
         },
         {
           "name": "capa:return_type",
@@ -424,7 +500,83 @@
         },
         {
           "name": "capa:pos",
-          "value": "domain.capa:103:5"
+          "value": "domain.capa:133:5"
+        },
+        {
+          "name": "capa:return_type",
+          "value": "Severity"
+        },
+        {
+          "name": "capa:has_unsafe",
+          "value": "false"
+        },
+        {
+          "name": "capa:is_pub",
+          "value": "true"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Clock"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Db"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Env"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Fs"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Net"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Proc"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Random"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "ReadOnlyFs"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Stdio"
+        },
+        {
+          "name": "capa:provably_excluded_capability",
+          "value": "Unsafe"
+        },
+        {
+          "name": "capa:param",
+          "value": "s: String"
+        }
+      ]
+    },
+    {
+      "bom-ref": "capa:fn:licenseaudit.capa:severity_label",
+      "type": "library",
+      "name": "severity_label",
+      "scope": "required",
+      "supplier": {
+        "name": "capa-build"
+      },
+      "licenses": [],
+      "properties": [
+        {
+          "name": "capa:kind",
+          "value": "function"
+        },
+        {
+          "name": "capa:pos",
+          "value": "domain.capa:144:5"
         },
         {
           "name": "capa:return_type",
@@ -480,7 +632,7 @@
         },
         {
           "name": "capa:param",
-          "value": "s: String"
+          "value": "s: Severity"
         }
       ]
     },
@@ -500,7 +652,7 @@
         },
         {
           "name": "capa:pos",
-          "value": "domain.capa:113:5"
+          "value": "domain.capa:151:5"
         },
         {
           "name": "capa:return_type",
@@ -556,7 +708,7 @@
         },
         {
           "name": "capa:param",
-          "value": "s: String"
+          "value": "s: Severity"
         }
       ]
     },
@@ -576,7 +728,7 @@
         },
         {
           "name": "capa:pos",
-          "value": "domain.capa:149:5"
+          "value": "domain.capa:185:5"
         },
         {
           "name": "capa:return_type",
@@ -2800,7 +2952,7 @@
         },
         {
           "name": "capa:pos",
-          "value": "policy.capa:83:5"
+          "value": "policy.capa:82:5"
         },
         {
           "name": "capa:return_type",
@@ -4938,9 +5090,11 @@
         "capa:builtin:licenseaudit.capa:Stdio",
         "capa:fn:licenseaudit.capa:dep_coordinate",
         "capa:fn:licenseaudit.capa:canonical_disposition",
+        "capa:fn:licenseaudit.capa:disposition_label",
         "capa:fn:licenseaudit.capa:is_violation",
         "capa:fn:licenseaudit.capa:needs_review",
         "capa:fn:licenseaudit.capa:canonical_severity",
+        "capa:fn:licenseaudit.capa:severity_label",
         "capa:fn:licenseaudit.capa:severity_rank",
         "capa:fn:licenseaudit.capa:audit_error_message",
         "capa:fn:licenseaudit.capa:_capa_m2__FsReadView::read",
@@ -5116,6 +5270,7 @@
       "ref": "capa:fn:licenseaudit.capa:_capa_m10__license_violations_section",
       "dependsOn": [
         "capa:fn:licenseaudit.capa:is_violation",
+        "capa:fn:licenseaudit.capa:disposition_label",
         "capa:fn:licenseaudit.capa:dep_coordinate"
       ]
     },
@@ -5129,6 +5284,7 @@
     {
       "ref": "capa:fn:licenseaudit.capa:_capa_m10__vuln_section",
       "dependsOn": [
+        "capa:fn:licenseaudit.capa:severity_label",
         "capa:fn:licenseaudit.capa:dep_coordinate"
       ]
     },
@@ -5136,7 +5292,9 @@
       "ref": "capa:fn:licenseaudit.capa:_capa_m10__remediation_section",
       "dependsOn": [
         "capa:fn:licenseaudit.capa:passed",
-        "capa:fn:licenseaudit.capa:is_violation"
+        "capa:fn:licenseaudit.capa:is_violation",
+        "capa:fn:licenseaudit.capa:disposition_label",
+        "capa:fn:licenseaudit.capa:severity_label"
       ]
     },
     {
@@ -5167,7 +5325,8 @@
       "ref": "capa:fn:licenseaudit.capa:_capa_m11__vuln_json",
       "dependsOn": [
         "capa:fn:licenseaudit.capa:_capa_m11__esc",
-        "capa:fn:licenseaudit.capa:dep_coordinate"
+        "capa:fn:licenseaudit.capa:dep_coordinate",
+        "capa:fn:licenseaudit.capa:severity_label"
       ]
     },
     {

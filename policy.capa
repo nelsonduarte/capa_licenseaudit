@@ -71,15 +71,14 @@ fun evaluate_one(policy: Policy, dep: Dependency) -> LicenseFinding
             }
     return LicenseFinding {
         dep: dep,
-        disposition: "unknown",
+        disposition: Unknown,
         category: "unclassified",
         note: "license id is not listed in the policy; triage required before shipping"
     }
 
 // Evaluate every dependency against the policy, preserving lockfile order
 // for stable, backend-identical output. The is_violation / needs_review
-// predicates live in domain.capa (the single source of truth for the
-// disposition tokens).
+// predicates live in domain.capa (matches over the Disp enum).
 pub fun evaluate_licenses(policy: Policy, deps: List<Dependency>) -> List<LicenseFinding>
     var findings: List<LicenseFinding> = []
     for dep in deps

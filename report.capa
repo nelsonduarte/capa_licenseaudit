@@ -32,7 +32,7 @@ fun license_violations_section(findings: List<LicenseFinding>) -> String
     for f in findings
         if is_violation(f)
             any = true
-            t = "${t}  [${f.disposition}] ${dep_coordinate(f.dep)}\n"
+            t = "${t}  [${disposition_label(f.disposition)}] ${dep_coordinate(f.dep)}\n"
             t = "${t}      license=${f.dep.license} category=${f.category}\n"
             t = "${t}      reason: ${f.note}\n"
     if not any
@@ -58,7 +58,7 @@ fun vuln_section(vulns: List<VulnFinding>) -> String
         t = "${t}  (none)\n"
         return t
     for v in vulns
-        t = "${t}  [${v.advisory.severity}] ${v.advisory.id}  ${dep_coordinate(v.dep)}\n"
+        t = "${t}  [${severity_label(v.advisory.severity)}] ${v.advisory.id}  ${dep_coordinate(v.dep)}\n"
         t = "${t}      ${v.advisory.summary}\n"
     return t
 
@@ -74,9 +74,9 @@ fun remediation_section(
     for f in licenses
         if is_violation(f)
             t = "${t}  [ ] replace or re-license ${f.dep.name} (${f.dep.license}); "
-            t = "${t}disposition=${f.disposition}\n"
+            t = "${t}disposition=${disposition_label(f.disposition)}\n"
     for v in vulns
-        t = "${t}  [ ] upgrade ${v.dep.name} past ${v.dep.version} (fixes ${v.advisory.id}, ${v.advisory.severity})\n"
+        t = "${t}  [ ] upgrade ${v.dep.name} past ${v.dep.version} (fixes ${v.advisory.id}, ${severity_label(v.advisory.severity)})\n"
     return t
 
 // The full compliance report as one string.

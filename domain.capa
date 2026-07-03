@@ -22,12 +22,11 @@
 // AUDITED project (produced by this program), alongside the capability
 // SBOM the Capa compiler emits for LicenseAudit itself.
 //
-// Note on the classification fields (`disposition`, `severity`): they are
-// held as canonical, closed-set STRING tokens rather than as enum-typed
-// struct fields, and the helpers below are the single source of truth for
-// the allowed values. This keeps the model portable across the Python and
-// Wasm backends (a nullary-enum field inside a struct is not yet supported
-// by the Wasm emitter; see the note in the README).
+// The classification fields (`disposition`, `severity`) are closed-set
+// enums (`Disp`, `Severity`), so the compiler enforces the allowed values
+// and every match over them is exhaustive. The `canonical_*` helpers parse
+// the CSV tokens into the enums; the `*_label` helpers render them back to
+// their canonical text for the report and the SBOM.
 
 // =========================================================
 // Dependency (one row of the resolved lockfile)
@@ -48,25 +47,41 @@ pub fun dep_coordinate(d: Dependency) -> String
 // License policy
 // =========================================================
 //
-// Disposition is a closed set of canonical tokens:
-//   allow   - permissive; conformant.
-//   review  - a gate needing a recorded human decision (weak copyleft).
-//   deny    - forbidden (strong / network copyleft in proprietary code).
-//   unknown - the id is not in the policy at all; fail closed.
+// Disposition is a closed-set enum:
+//   Allow   - permissive; conformant.
+//   Review  - a gate needing a recorded human decision (weak copyleft).
+//   Deny    - forbidden (strong / network copyleft in proprietary code).
+//   Unknown - the id is not in the policy at all; fail closed.
 
-pub fun canonical_disposition(s: String) -> String
+pub type Disp =
+    Allow
+    Review
+    Deny
+    Unknown
+
+// Parse a canonical CSV token into a Disp; anything unrecognised is Unknown
+// (fail closed).
+pub fun canonical_disposition(s: String) -> Disp
     let t = s.trim()
     if t == "allow"
-        return "allow"
+        return Allow
     if t == "review"
-        return "review"
+        return Review
     if t == "deny"
-        return "deny"
-    return "unknown"
+        return Deny
+    return Unknown
+
+// Render a Disp back to its canonical text for the report.
+pub fun disposition_label(d: Disp) -> String
+    return match d
+        Allow   -> "allow"
+        Review  -> "review"
+        Deny    -> "deny"
+        Unknown -> "unknown"
 
 pub type PolicyEntry {
     spdx: String,
-    disposition: String,   // canonical: allow / review / deny
+    disposition: Disp,
     category: String,      // permissive / weak-copyleft / strong-copyleft ...
     note: String
 }
@@ -78,52 +93,73 @@ pub type Policy {
 // A license finding: one dependency evaluated against the policy.
 pub type LicenseFinding {
     dep: Dependency,
-    disposition: String,   // canonical: allow / review / deny / unknown
+    disposition: Disp,
     category: String,
     note: String
 }
 
-// A finding is a VIOLATION when the disposition is `deny` (a forbidden
-// license, e.g. strong copyleft in proprietary code) or `unknown` (an
-// un-triaged license). `review` is a gate, reported separately, not a
+// A finding is a VIOLATION when the disposition is `Deny` (a forbidden
+// license, e.g. strong copyleft in proprietary code) or `Unknown` (an
+// un-triaged license). `Review` is a gate, reported separately, not a
 // violation on its own.
 pub fun is_violation(f: LicenseFinding) -> Bool
-    return f.disposition == "deny" or f.disposition == "unknown"
+    return match f.disposition
+        Deny    -> true
+        Unknown -> true
+        Allow   -> false
+        Review  -> false
 
 pub fun needs_review(f: LicenseFinding) -> Bool
-    return f.disposition == "review"
+    return match f.disposition
+        Review  -> true
+        Allow   -> false
+        Deny    -> false
+        Unknown -> false
 
 // =========================================================
 // Vulnerability advisory (one row of the local OSV feed)
 // =========================================================
 //
-// Severity is a closed set of canonical tokens (critical/high/medium/low)
-// with a numeric rank for ordering and totalling.
+// Severity is a closed-set enum (Critical/High/Medium/Low) with a numeric
+// rank for ordering and totalling.
 
-pub fun canonical_severity(s: String) -> String
+pub type Severity =
+    Critical
+    High
+    Medium
+    Low
+
+// Parse a canonical CSV token into a Severity; anything unrecognised is Low.
+pub fun canonical_severity(s: String) -> Severity
     let t = s.trim()
     if t == "critical"
-        return "critical"
+        return Critical
     if t == "high"
-        return "high"
+        return High
     if t == "medium"
-        return "medium"
-    return "low"
+        return Medium
+    return Low
 
-pub fun severity_rank(s: String) -> Int
-    if s == "critical"
-        return 4
-    if s == "high"
-        return 3
-    if s == "medium"
-        return 2
-    return 1
+// Render a Severity back to its canonical text for the report and SBOM.
+pub fun severity_label(s: Severity) -> String
+    return match s
+        Critical -> "critical"
+        High     -> "high"
+        Medium   -> "medium"
+        Low      -> "low"
+
+pub fun severity_rank(s: Severity) -> Int
+    return match s
+        Critical -> 4
+        High     -> 3
+        Medium   -> 2
+        Low      -> 1
 
 pub type Advisory {
     id: String,
     package: String,
     version: String,
-    severity: String,      // canonical: critical / high / medium / low
+    severity: Severity,
     summary: String
 }
 

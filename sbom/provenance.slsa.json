@@ -4,7 +4,7 @@
     {
       "name": "domain.capa",
       "digest": {
-        "sha256": "097dba9623656833925ff8c92ac5861a2175f8e3a1d9339a93245b1f2ce14102"
+        "sha256": "b5f225a92c5445656a6fc9e8b928a4c6d041aa73ad1c86bf35a8be9776496add"
       }
     },
     {
@@ -28,7 +28,7 @@
     {
       "name": "policy.capa",
       "digest": {
-        "sha256": "657d25fac6c4976238c1da70d46ede8b34f83d266f5136078d4a645deda6f9ce"
+        "sha256": "abab48f83f51bffca829793f170bb23b3d44635e1cf8c80c49f49124b6a7b4ba"
       }
     },
     {
@@ -40,7 +40,7 @@
     {
       "name": "report.capa",
       "digest": {
-        "sha256": "436688833e041393234d5c4e1df7dfc55c02599fe8152807f2eed4c7e4be738d"
+        "sha256": "421b7a881cbab2263e03f28776ebc3838163bd7025d8afb34aa41e15675b8da1"
       }
     },
     {
@@ -52,7 +52,7 @@
     {
       "name": "sbom.capa",
       "digest": {
-        "sha256": "7e643bbf8e884be1030e41d2bfc8824433dc8b1ecb015ea37cf0de8f35a42666"
+        "sha256": "77ce628462d86f90361a8cbc3ddcd10a085b82fa472f877b6166d0c86eec52d8"
       }
     },
     {
@@ -95,7 +95,7 @@
         }
       },
       "metadata": {
-        "invocationId": "2f0cd26c-3bc8-50f6-b9fb-6188d251e2b8",
+        "invocationId": "98d30076-4079-5c0c-92aa-eae922e2f609",
         "startedOn": "2026-01-01T00:00:00Z",
         "finishedOn": "2026-01-01T00:00:00Z"
       },

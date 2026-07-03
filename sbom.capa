@@ -56,7 +56,7 @@ fun vuln_json(v: VulnFinding) -> String
     var t = "    {\n"
     t = "${t}      \"id\": \"${esc(v.advisory.id)}\",\n"
     t = "${t}      \"affects\": [{ \"ref\": \"${esc(dep_coordinate(v.dep))}\" }],\n"
-    t = "${t}      \"ratings\": [{ \"severity\": \"${esc(v.advisory.severity)}\" }],\n"
+    t = "${t}      \"ratings\": [{ \"severity\": \"${esc(severity_label(v.advisory.severity))}\" }],\n"
     t = "${t}      \"description\": \"${esc(v.advisory.summary)}\"\n"
     t = "${t}    }"
     return t

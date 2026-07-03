@@ -228,7 +228,7 @@ python -m capa --wasm --component --run licenseaudit.capa   # as a Wasm componen
 ```
 
 **WASI Preview 2 note.** The stock `--wasi` backend is **not** supported for
-this program in the current compiler (Capa 1.13.0), by design of the
+this program in the current compiler (Capa 1.15.0), by design of the
 guarantee, not by accident. The `--wasi` static-preopen ceiling resolves a
 filesystem path only when it reaches the built-in `Fs` sink as a
 compile-time literal. Here the path is routed through the `ReadOnlyFs`

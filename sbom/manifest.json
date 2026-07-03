@@ -22,7 +22,7 @@
       "container": null,
       "source_container": null,
       "source_module_index": null,
-      "pos": "domain.capa:44:5",
+      "pos": "domain.capa:43:5",
       "is_pub": true,
       "doc": null,
       "params": [
@@ -65,13 +65,64 @@
       "container": null,
       "source_container": null,
       "source_module_index": null,
-      "pos": "domain.capa:57:5",
+      "pos": "domain.capa:64:5",
       "is_pub": true,
       "doc": null,
       "params": [
         {
           "name": "s",
           "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Disp",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "s.trim",
+          "pos": "65:13",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "disposition_label",
+      "source_name": "disposition_label",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "domain.capa:75:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "d",
+          "type": "Disp",
           "consuming": false,
           "is_capability": false,
           "is_linear": false
@@ -99,15 +150,7 @@
       "has_unsafe": false,
       "constant_time": false,
       "attributes": [],
-      "calls": [
-        {
-          "kind": "method",
-          "callee": "s.trim",
-          "pos": "58:13",
-          "args": [],
-          "args_flow": []
-        }
-      ],
+      "calls": [],
       "declassifications": []
     },
     {
@@ -116,7 +159,7 @@
       "container": null,
       "source_container": null,
       "source_module_index": null,
-      "pos": "domain.capa:90:5",
+      "pos": "domain.capa:105:5",
       "is_pub": true,
       "doc": null,
       "params": [
@@ -159,7 +202,7 @@
       "container": null,
       "source_container": null,
       "source_module_index": null,
-      "pos": "domain.capa:93:5",
+      "pos": "domain.capa:112:5",
       "is_pub": true,
       "doc": null,
       "params": [
@@ -202,13 +245,64 @@
       "container": null,
       "source_container": null,
       "source_module_index": null,
-      "pos": "domain.capa:103:5",
+      "pos": "domain.capa:133:5",
       "is_pub": true,
       "doc": null,
       "params": [
         {
           "name": "s",
           "type": "String",
+          "consuming": false,
+          "is_capability": false,
+          "is_linear": false
+        }
+      ],
+      "return_type": "Severity",
+      "declared_capabilities": [],
+      "transitively_reachable_capabilities": [],
+      "provably_excluded_capabilities": [
+        "Clock",
+        "Db",
+        "Env",
+        "Fs",
+        "Net",
+        "Proc",
+        "Random",
+        "ReadOnlyFs",
+        "Stdio",
+        "Unsafe"
+      ],
+      "linear_obligations": {
+        "consumes": [],
+        "produces_linear": false
+      },
+      "has_unsafe": false,
+      "constant_time": false,
+      "attributes": [],
+      "calls": [
+        {
+          "kind": "method",
+          "callee": "s.trim",
+          "pos": "134:13",
+          "args": [],
+          "args_flow": []
+        }
+      ],
+      "declassifications": []
+    },
+    {
+      "name": "severity_label",
+      "source_name": "severity_label",
+      "container": null,
+      "source_container": null,
+      "source_module_index": null,
+      "pos": "domain.capa:144:5",
+      "is_pub": true,
+      "doc": null,
+      "params": [
+        {
+          "name": "s",
+          "type": "Severity",
           "consuming": false,
           "is_capability": false,
           "is_linear": false
@@ -236,15 +330,7 @@
       "has_unsafe": false,
       "constant_time": false,
       "attributes": [],
-      "calls": [
-        {
-          "kind": "method",
-          "callee": "s.trim",
-          "pos": "104:13",
-          "args": [],
-          "args_flow": []
-        }
-      ],
+      "calls": [],
       "declassifications": []
     },
     {
@@ -253,13 +339,13 @@
       "container": null,
       "source_container": null,
       "source_module_index": null,
-      "pos": "domain.capa:113:5",
+      "pos": "domain.capa:151:5",
       "is_pub": true,
       "doc": null,
       "params": [
         {
           "name": "s",
-          "type": "String",
+          "type": "Severity",
           "consuming": false,
           "is_capability": false,
           "is_linear": false
@@ -296,7 +382,7 @@
       "container": null,
       "source_container": null,
       "source_module_index": null,
-      "pos": "domain.capa:149:5",
+      "pos": "domain.capa:185:5",
       "is_pub": true,
       "doc": null,
       "params": [
@@ -2780,7 +2866,7 @@
       "container": null,
       "source_container": null,
       "source_module_index": null,
-      "pos": "policy.capa:83:5",
+      "pos": "policy.capa:82:5",
       "is_pub": true,
       "doc": null,
       "params": [
@@ -2825,7 +2911,7 @@
         {
           "kind": "method",
           "callee": "findings.push",
-          "pos": "86:9",
+          "pos": "85:9",
           "args": [
             "_capa_m7__evaluate_one(policy, dep)"
           ],
@@ -2836,7 +2922,7 @@
         {
           "kind": "fn",
           "callee": "_capa_m7__evaluate_one",
-          "pos": "86:23",
+          "pos": "85:23",
           "args": [
             "policy",
             "dep"
@@ -3682,8 +3768,19 @@
         },
         {
           "kind": "fn",
+          "callee": "disposition_label",
+          "pos": "35:27",
+          "args": [
+            "f.disposition"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
           "callee": "dep_coordinate",
-          "pos": "35:45",
+          "pos": "35:64",
           "args": [
             "f.dep"
           ],
@@ -3810,8 +3907,19 @@
         },
         {
           "kind": "fn",
+          "callee": "severity_label",
+          "pos": "61:23",
+          "args": [
+            "v.advisory.severity"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
           "callee": "dep_coordinate",
-          "pos": "61:65",
+          "pos": "61:81",
           "args": [
             "v.dep"
           ],
@@ -3894,6 +4002,28 @@
           "pos": "75:12",
           "args": [
             "f"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "disposition_label",
+          "pos": "77:36",
+          "args": [
+            "f.disposition"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "severity_label",
+          "pos": "79:95",
+          "args": [
+            "v.advisory.severity"
           ],
           "args_flow": [
             null
@@ -4333,6 +4463,17 @@
           "kind": "fn",
           "callee": "_capa_m11__esc",
           "pos": "59:54",
+          "args": [
+            "severity_label(v.advisory.severity)"
+          ],
+          "args_flow": [
+            null
+          ]
+        },
+        {
+          "kind": "fn",
+          "callee": "severity_label",
+          "pos": "59:58",
           "args": [
             "v.advisory.severity"
           ],
@@ -5564,7 +5705,7 @@
     "arguments": []
   },
   "summary": {
-    "total_functions": 59,
+    "total_functions": 61,
     "functions_with_capabilities": 5,
     "functions_with_attributes": 0,
     "functions_crossing_unsafe": 0,
