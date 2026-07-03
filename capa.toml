@@ -7,9 +7,11 @@
 # capability whose surface is a single `read` method, so the compiler
 # proves the auditor cannot modify the tree it audits.
 #
-# One dependency, pure and capability-free, vendored under vendor/ and
-# wired as a PATH dependency so its parent (vendor/) joins the module
-# search path:
+# One dependency, pure and capability-free, resolved as a VERIFIED git
+# dependency. `capa install` fetches it at its GPG-signed tag, verifies
+# the tag signature against verify_key and its SLSA provenance, records
+# the pinned commit in capa.lock, and vendors it under vendor/ (git-
+# ignored):
 #
 #   capa_csv - RFC 4180 CSV parsing (the lockfile / policy / OSV reader).
 #
@@ -20,7 +22,9 @@
 [package]
 name = "capa_licenseaudit"
 version = "0.1.0"
-capa = ">=1.15.0"
+capa = ">=1.15.1"
 
 [dependencies.capa_csv]
-path = "vendor/capa_csv"
+git = "https://github.com/nelsonduarte/capa_csv"
+tag = "v0.1.1"
+verify_key = "6C1D222D491FB88031E041A536CFB426101AA24B"
