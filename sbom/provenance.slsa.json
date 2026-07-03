@@ -82,7 +82,7 @@
         "source": "licenseaudit.capa"
       },
       "internalParameters": {
-        "capaVersion": "1.13.0",
+        "capaVersion": "1.15.0",
         "target": "python>=3.10"
       },
       "resolvedDependencies": []
@@ -91,7 +91,7 @@
       "builder": {
         "id": "https://capa-language.com/cli",
         "version": {
-          "capa": "1.13.0"
+          "capa": "1.15.0"
         }
       },
       "metadata": {
