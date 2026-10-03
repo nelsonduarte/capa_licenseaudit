@@ -2,12 +2,12 @@
 #
 # LicenseAudit walks a monorepo's dependency lockfile and emits a
 # compliance report plus a CycloneDX SBOM of the audited project. Its
-# central Capa guarantee is an "auditor that only reads": the repository
-# under audit is reached exclusively through a user-defined `ReadOnlyFs`
-# capability whose surface is a single `read` method, so the compiler
-# proves the auditor cannot modify the tree it audits.
+# central Capa property is an "auditor that only reads": the audit code
+# receives the repository under audit as a user-defined `ReadOnlyFs`
+# capability whose declared surface is a single `read` method, and the
+# compiler refuses a call to `write` or `remove` on it.
 #
-# One dependency, pure and capability-free, resolved as a VERIFIED git
+# One dependency, capability-free, resolved as a VERIFIED git
 # dependency. `capa install` fetches it at its GPG-signed tag, verifies
 # the tag signature against verify_key and its SLSA provenance, records
 # the pinned commit in capa.lock, and vendors it under vendor/ (git-
@@ -16,8 +16,8 @@
 #   capa_csv - RFC 4180 CSV parsing (the lockfile / policy / OSV reader).
 #
 # The dependency holds no authority, so the LicenseAudit capability
-# surface stays exactly what main.capa acquires: Fs and Stdio, nothing
-# more. The compiler's --manifest / --cyclonedx output proves it.
+# surface stays what main.capa acquires: Fs and Stdio. The compiler's
+# --manifest / --cyclonedx output records it.
 
 [package]
 name = "capa_licenseaudit"

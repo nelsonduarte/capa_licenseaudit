@@ -2,13 +2,13 @@
 
 A monorepo **license and vulnerability auditor** that walks a project's
 resolved dependency lockfile and emits a compliance report plus a
-CycloneDX SBOM of the audited project. Its defining property is a
-compile-time guarantee: **the auditor can only READ the repository it
-audits.** That is not a code-review promise or a runtime sandbox. It is a
-fact the [Capa](https://github.com/nelsonduarte) compiler checks, because
-the audited tree is reached exclusively through a capability whose entire
-surface is a single `read` method. There is no `write`, and the compiler
-proves there is no path to one.
+CycloneDX SBOM of the audited project. Its defining property is checked
+at compile time: **the code that walks the repository it audits gets it
+through a read-only capability.** That is not a code-review promise or a
+runtime sandbox. The [Capa](https://github.com/nelsonduarte) compiler
+checks it: the audit functions receive the tree as `ReadOnlyFs`, a
+capability that declares a single `read` method, and the compiler refuses
+a call to `write` or `remove` on it.
 
 ## The problem
 
@@ -41,7 +41,7 @@ Given a normalised dependency lockfile, a license policy and a local OSV
 advisory feed, it:
 
 1. **Parses** the lockfile into typed `Dependency` records (name, pinned
-   version, declared SPDX license, ecosystem), using the pure `capa_csv`
+   version, declared SPDX license, ecosystem), using the capability-free `capa_csv`
    RFC 4180 reader so a quoted license expression never corrupts a row.
 2. **Evaluates license conformance** (the primary axis) against a policy
    that marks each SPDX id `allow` / `review` / `deny`. A `deny` license
@@ -63,9 +63,9 @@ It ships two sample repositories so both outcomes are visible: a
 `violating_repo` (license violations + vulnerabilities, verdict FAIL) and a
 `clean_repo` (verdict PASS).
 
-## Why "an auditor that only reads" is a guarantee, not a claim
+## What makes "an auditor that only reads" checkable
 
-### 1. The read-only capability: mutation does not compile
+### 1. The read-only capability: a write call does not compile
 
 The repository under audit is reached through `ReadOnlyFs`, a user-defined
 capability declared in `readfs.capa`:
@@ -75,10 +75,9 @@ pub capability ReadOnlyFs
     fun read(self, path: String) -> Result<String, IoError>
 ```
 
-That is the whole surface: one `read` method, nothing that mutates. A
-capability's authority in Capa is exactly its method set, so a holder of
-`ReadOnlyFs` **cannot** call `write` or `remove`; those calls are not
-runtime failures, they do not type-check. `leaky_licenseaudit.capa` is the
+That is the whole declared surface: one `read` method, nothing that
+mutates. A call to `write` or `remove` on a `ReadOnlyFs` is not a runtime
+failure: it does not type-check. `leaky_licenseaudit.capa` is the
 counter-example that makes the compiler say so:
 
 ```
@@ -90,15 +89,14 @@ leaky_licenseaudit.capa: 3 errors            # exit code 1
 ```
 
 The bridge from the real filesystem to this view (`make_read_view`) narrows
-a built-in `Fs` to the `data/` prefix and seals it inside a private field
-that a holder of the abstract `ReadOnlyFs` cannot read back out. Two
-independent walls therefore protect the audited tree: **path attenuation**
-(the view can only see `data/`) and **method attenuation** (the view can
-only read). The write path for the report and SBOM is a *separate* `Fs`
-scoped to `out/`; the two never mix.
+a built-in `Fs` to the `data/` prefix and keeps it in a field of the
+implementor; the analyzer refuses reaching that field through a value
+typed `ReadOnlyFs`. Two independent narrowings therefore apply to the
+audited tree: **path attenuation** (the view sees `data/`) and **method
+attenuation** (the view declares only `read`). The write path for the
+report and SBOM is a *separate* `Fs` scoped to `out/`.
 
-The capability manifest records the read-only surface as a machine-checkable
-fact:
+The capability manifest records the read-only surface:
 
 ```
 $ python -m capa --manifest licenseaudit.capa | jq '.user_defined_capabilities'
@@ -107,14 +105,13 @@ $ python -m capa --manifest licenseaudit.capa | jq '.user_defined_capabilities'
 ]
 ```
 
-One capability, one method. An auditor that could ever write would need a
-second method here, and there is none.
+One capability, one method.
 
-### 2. Capability discipline: the auditor provably cannot exfiltrate
+### 2. Capability discipline: the auditor holds no `Net`
 
 `main` acquires exactly `Fs` and `Stdio`, and nothing else. It never
 acquires `Net`, `Env`, `Proc`, `Db`, `Clock`, `Random` or `Unsafe`. The
-compiler proves it and the manifest records it:
+compiler checks it and the manifest records it:
 
 ```
 $ python -m capa --manifest licenseaudit.capa \
@@ -132,7 +129,7 @@ network.
 
 ### 3. The artefacts
 
-`./generate.sh` produces, byte-reproducibly (pinned `SOURCE_DATE_EPOCH`),
+`./generate.sh` produces, with timestamps pinned by `SOURCE_DATE_EPOCH`,
 two distinct families. Do not confuse them:
 
 | Artefact | Emitted by | What it is |
@@ -145,7 +142,7 @@ two distinct families. Do not confuse them:
 | `sbom/provenance.slsa.json` | `capa --provenance` | SLSA build provenance |
 
 The `out/*sbom*.json` are what LicenseAudit *produces* about the code it
-audits; the `sbom/*.json` are what the compiler *proves* about LicenseAudit.
+audits; the `sbom/*.json` are what the compiler *records* about LicenseAudit.
 
 ## Distinction from SupplyGate
 
@@ -175,19 +172,19 @@ is a clean PASS. Both are in `out/`.
 | Path | Role |
 | --- | --- |
 | `domain.capa` | the typed model: dependency, policy, advisory, findings, errors |
-| `readfs.capa` | the `ReadOnlyFs` capability and its bridge from `Fs` (the guarantee) |
-| `manifest.capa` | parse the lockfile CSV into `Dependency`s (pure) |
-| `policy.capa` | parse the policy and evaluate license conformance (pure) |
-| `osv.capa` | parse the OSV feed and cross-reference dependencies (pure) |
-| `risk.capa` | fold findings into the risk summary + verdict (pure) |
-| `report.capa` | build the human compliance report string (pure) |
-| `sbom.capa` | build the CycloneDX SBOM of the audited project (pure) |
+| `readfs.capa` | the `ReadOnlyFs` capability and its bridge from `Fs` (the read-only view) |
+| `manifest.capa` | parse the lockfile CSV into `Dependency`s (no capability) |
+| `policy.capa` | parse the policy and evaluate license conformance (no capability) |
+| `osv.capa` | parse the OSV feed and cross-reference dependencies (no capability) |
+| `risk.capa` | fold findings into the risk summary + verdict (no capability) |
+| `report.capa` | build the human compliance report string (no capability) |
+| `sbom.capa` | build the CycloneDX SBOM of the audited project (no capability) |
 | `licenseaudit.capa` | the orchestrator: read (ReadOnlyFs) -> audit -> write (Fs) |
 | `leaky_licenseaudit.capa` | counter-example: the mutation the compiler rejects |
 | `data/` | two sample repos, the license policy, the OSV feed |
 | `out/` | sample reports + audited-project SBOMs |
 | `sbom/` | sample manifest + SBOMs + provenance for LicenseAudit itself |
-| `capa_csv` (git dep) | pure, capability-free; fetched + GPG/SLSA-verified by `capa install` into `vendor/` (RFC 4180 CSV) |
+| `capa_csv` (git dep) | capability-free; fetched + GPG/SLSA-verified by `capa install` into `vendor/` (RFC 4180 CSV) |
 
 The input formats are deliberately simple, ecosystem-neutral CSV: a
 normalised lockfile (`name,version,license,ecosystem`), a policy
@@ -208,7 +205,7 @@ All commands use the local Capa compiler; substitute `python -m capa` for
 # GPG signature against the verify_key in capa.toml and its SLSA
 # provenance, writes capa.lock, and vendors the source under vendor/.
 # Import the publisher key first (see capa_csv's SECURITY.md). capa_csv
-# is pure and holds zero capabilities, so this adds a verified supply
+# holds zero capabilities, so this adds a verified supply
 # chain without widening the {Fs, Stdio} surface.
 python -m capa install
 
@@ -238,7 +235,7 @@ python -m capa --wasm --component --run licenseaudit.capa   # as a Wasm componen
 
 **WASI Preview 2 note.** The stock `--wasi` backend is **not** supported for
 this program in the current compiler (Capa 1.16.0), by design of the
-guarantee, not by accident. The `--wasi` static-preopen ceiling resolves a
+read-only view, not by accident. The `--wasi` static-preopen ceiling resolves a
 filesystem path only when it reaches the built-in `Fs` sink as a
 compile-time literal. Here the path is routed through the `ReadOnlyFs`
 capability method (`ro.read("data/...")` -> `self.fs.read(path)`), so the
@@ -247,7 +244,7 @@ dynamic. The current WASI increment (Fs layer b1) then supports neither
 mixing literal and dynamic paths in one program nor more than one
 `--preopen` directory, and LicenseAudit needs a read directory (`data/`) and
 a disjoint write directory (`out/`). Making `--wasi` run would mean giving up
-either the read-only capability wrapper (the entire guarantee) or the
+either the read-only capability wrapper (the point of the design) or the
 minimal `{Fs, Stdio}` surface (dynamic paths pull in `Env`). Rather than
 weaken the design to satisfy a backend the compiler cannot yet serve for
 this idiom, the program keeps the strong shape and runs on the other three
@@ -255,7 +252,7 @@ backends. This is a known compiler limitation, reported upstream.
 
 ## Dependencies
 
-One dependency, **pure and capability-free**, resolved as a **verified git
+One dependency, **capability-free**, resolved as a **verified git
 dependency** in `capa.toml`:
 
 - `capa_csv` - RFC 4180 CSV parsing (the lockfile / policy / OSV reader).
@@ -279,7 +276,7 @@ This is the verifiable supply chain Capa is about, made concrete: the
 dependency is **cryptographically verified at install time**, not trusted
 by convention, and its pinned, signed provenance is recorded in
 `capa.lock`. It holds no authority, so the LicenseAudit capability surface
-stays exactly `{Fs, Stdio}`, and the SBOM proves it does not widen it.
+stays `{Fs, Stdio}`, and the SBOM shows it does not widen it.
 
 ## Licence
 
