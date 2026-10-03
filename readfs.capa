@@ -30,7 +30,7 @@ pub capability ReadOnlyFs
 // The concrete implementor. It holds a built-in `Fs` in a field: the
 // cap-bearing-struct relaxation lets a struct that implements a
 // user-defined capability hold built-in capabilities other than
-// `Unsafe` as fields.
+// `Unsafe` as bare fields.
 type FsReadView {
     fs: Fs
 }

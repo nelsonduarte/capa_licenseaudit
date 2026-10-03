@@ -1,5 +1,5 @@
 #!/bin/sh
-# Regenerate the LicenseAudit machine-verifiable artefacts:
+# Regenerate the LicenseAudit machine-readable artefacts:
 #
 #   out/violating_report.txt              compliance report, violating repo
 #   out/clean_report.txt                  compliance report, clean repo
@@ -39,7 +39,7 @@ mkdir -p out sbom
 # SBOMs over both sample repositories.
 capa --run licenseaudit.capa
 
-# Emit the compiler-side proof artefacts for LicenseAudit itself.
+# Emit the compiler-side artefacts for LicenseAudit itself.
 capa --manifest   licenseaudit.capa > sbom/manifest.json
 capa --cyclonedx  licenseaudit.capa > sbom/sbom.cyclonedx.json
 capa --spdx       licenseaudit.capa > sbom/sbom.spdx.json
