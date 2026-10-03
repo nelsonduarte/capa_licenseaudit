@@ -14,13 +14,13 @@
 //
 //   1. The repository under audit is reached ONLY through a `ReadOnlyFs`
 //      (readfs.capa). That capability has a `read` method and nothing
-//      else, so LicenseAudit provably cannot modify the tree it audits:
-//      an "auditor that only reads" is a compile-time fact. The write
-//      view over out/ is a SEPARATE, disjoint Fs; the two never mix.
+//      else, so the compiler refuses a write or remove call on it (see
+//      leaky_licenseaudit.capa). The write view over out/ is a SEPARATE
+//      Fs, restricted to out/.
 //
 //   2. main acquires exactly Stdio and Fs, and never Net, Env, Proc, Db,
-//      Clock, Random or Unsafe. The capability SBOM (capa --manifest)
-//      proves it, so "this auditor cannot phone home with what it read"
+//      Clock, Random or Unsafe. The capability manifest (capa --manifest)
+//      records it, so "this auditor cannot phone home with what it read"
 //      is a checked fact.
 //
 // Every Fs sink (read and write) carries an INLINE string literal path,
@@ -29,7 +29,7 @@
 // The write view over out/ is thus statically known.
 //
 // The auditor's READS go through the ReadOnlyFs capability method, which
-// is exactly the point of the guarantee: the audited tree is reached only
+// is exactly the point of the design: the audited tree is reached only
 // via read. One consequence is that the stock --wasi backend does not run
 // this program in the current compiler: the static-preopen ceiling cannot
 // see the literal read path through the capability method, so it treats it
@@ -137,8 +137,8 @@ pub fun main(stdio: Stdio, fs: Fs)
 
     // Least privilege, two disjoint views. The audited repo is reached
     // ONLY through a read-only capability; the report/SBOM outputs go to a
-    // separate write view over out/. The read-only view cannot write, and
-    // the write view is scoped out of the audited tree.
+    // separate write view over out/. The read-only view declares no write
+    // method, and the write view is restricted to out/.
     let ro = make_read_view(fs, "data/")
     let fs_out = fs.restrict_to("out/")
 

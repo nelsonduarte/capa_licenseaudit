@@ -90,9 +90,7 @@ leaky_licenseaudit.capa: 3 errors            # exit code 1
 
 The bridge from the real filesystem to this view (`make_read_view`) narrows
 a built-in `Fs` to the `data/` prefix and keeps it in a field of the
-implementor; the analyzer refuses reaching that field through a value
-typed `ReadOnlyFs`. Two independent narrowings therefore apply to the
-audited tree: **path attenuation** (the view sees `data/`) and **method
+implementor. Two narrowings apply to the audited tree: **path attenuation** (the view sees `data/`) and **method
 attenuation** (the view declares only `read`). The write path for the
 report and SBOM is a *separate* `Fs` scoped to `out/`.
 

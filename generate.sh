@@ -15,13 +15,14 @@
 #   * out/*sbom*.json  is the SBOM of the AUDITED PROJECT, produced by
 #     RUNNING LicenseAudit over a lockfile. This is the program's output.
 #   * sbom/*.json      is the capability SBOM of LICENSEAUDIT ITSELF,
-#     EMITTED BY THE COMPILER from the same source. It proves the auditor's
-#     surface is exactly {Fs, Stdio} and that the audited tree is reached
-#     through a read-only capability.
+#     EMITTED BY THE COMPILER from the same source. It records what each
+#     function declares: main declares {Fs, Stdio}, and run_violating and
+#     run_clean take the audited tree as a read-only `ReadOnlyFs`.
 #
 # Determinism comes from SOURCE_DATE_EPOCH (reproducible-builds.org): the
-# compiler stamps the SBOM build time from this fixed instant, so the
-# compiler-emitted artefacts are byte-reproducible. Bump it by writing a
+# compiler stamps the SBOM build time from this fixed instant. The
+# compiler's tests pin byte-identical output for repeated runs; a
+# rebuild-and-diff is a check to run, not a guarantee. Bump it by writing a
 # new UTC epoch to sbom/SOURCE_DATE_EPOCH and rerunning this script.
 #
 # Run every Capa invocation through the LOCAL compiler:
